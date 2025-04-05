@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="wIntput">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:hint">@string/enter_weight</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:textColor">@color/fontColor</item>
+        <item name="android:fontFamily">@font/opensans_condensed_medium</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:maxLength">3</item>
+        <item name="android:backgroundTint">@color/fontColor</item>
+        <item name="android:textColorHint">@color/hintColor</item>
+
+    </style>
+
+    <style name="levelSpinner">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:entries">@array/activity_levels</item>
+        <item name="android:textColor">@color/fontColor</item>
+        <item name="android:popupBackground">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/opensans_condensed_medium</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="android:backgroundTint">@color/fontColor</item>
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="genderSpinner">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:entries">@array/Gender</item>
+        <item name="android:textColor">@color/fontColor</item>
+        <item name="android:popupBackground">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/opensans_condensed_medium</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="android:backgroundTint">@color/fontColor</item>
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="calButton">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="android:text">@string/calculate_button</item>
+        <item name="android:textColor">@color/fontColor</item>
+        <item name="android:fontFamily">@font/opensans_condensed_medium</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:src">@drawable/button_background</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:background">@null</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:soundEffectsEnabled">false</item>
+    </style>
+
+    <style name="resultTxt">
+        <item name="android:visibility">gone</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/fontColor</item>
+        <item name="android:background">@drawable/result_text_background</item>
+        <item name="android:fontFamily">@font/opensans_condensed_medium</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+
+    <style name="pressBtnTxt">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/calculate_button</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingTop">30dp</item>
+        <item name="android:textColor">@color/fontColor</item>
+        <item name="android:fontFamily">@font/opensans_condensed_medium</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <!--iMAGES -->
+    <style name="imageWeight">
+        <item name="android:layout_width">75dp</item>
+        <item name="android:layout_height">75dp</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:src">@drawable/bascule_icon</item>
+    </style>
+
+    <style name="imageGender">
+        <item name="android:layout_width">75dp</item>
+        <item name="android:layout_height">75dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:src">@drawable/gender_icon</item>
+    </style>
+
+    <style name="imageActivity">
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_width">75dp</item>
+        <item name="android:layout_height">75dp</item>
+        <item name="android:layout_gravity">left</item>
+
+        <item name="android:src">@drawable/weight_icon</item>
+    </style>
+
+    <!--lINEAR LAYOUTS-->
+    <style name="linearWeight">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="linearActivity">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">50dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="linearButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="linearResult">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">30dp</item>
+    </style>
+
+    <style name="linearAds">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>

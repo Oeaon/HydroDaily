@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">HydroDaily</string>
+    <string-array name="activity_levels">
+        <item>Choisissez votre niveau d\'activité physique</item>
+        <item>Faible</item>
+        <item>Modéré</item>
+        <item>Élevé</item>
+    </string-array>
+    <string-array name="Gender">
+        <item>Choisissez votre genre</item>
+        <item>Féminin</item>
+        <item>Masculin</item>
+    </string-array>
+    <string name="enter_weight">Entrez votre poids (kg)</string>
+    <string name="calculate_button">Appuyez sur la goutte et calculez votre apport en eau pour aujourd\'hui !</string>
+    <string name="result_preview_text">Votre consommation d\'eau quotidienne apparaîtra ici.</string>
+    <string name="valid_weight">Veuillez entrer des valeurs appropriées dans chaque champ.</string>
+    <string name="result_text">"Aujourd'hui, vous devez boire %1$s litres d'eau." 💧</string>
+    <string name="spinner_hint">"Entrez votre niveau d'activité physique."</string>
+    <string name="notification_title">Tu dois boire de l \'eau tous les jours</string>
+    <string name="notification_description">C\'est important pour ta santé. 💧</string>
+    <string name="notification_permission_title">Permission de Notifications</string>
+    <string name="notification_permission_message">Cette application a besoin d\'envoyer des notifications pour vous rappeler votre consommation d\'eau quotidienne. Veuillez accorder la permission.</string>
+    <string name="acept">Accepter</string>
+    <string name="cancel">Annuler</string>
+
+</resources>

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">HydroDaily</string>
+    <string-array name="activity_levels">
+        <item>选择您的身体活动水平</item>
+        <item>低</item>
+        <item>中等</item>
+        <item>高</item>
+    </string-array>
+    <string-array name="Gender">
+        <item>选择您的性别</item>
+        <item>女性</item>
+        <item>男性</item>
+    </string-array>
+    <string name="enter_weight">输入您的体重（千克）</string>
+    <string name="calculate_button">点击水滴，计算今天的饮水量！</string>
+    <string name="result_preview_text">您的每日饮水量将在这里显示。</string>
+    <string name="valid_weight">请在每个字段中输入适当的值。</string>
+    <string name="result_text">"今天您应该喝 %1$s 升水。"</string>
+    <string name="spinner_hint">"请输入您的活动水平。"</string>
+    <string name="notification_title">今天别忘了喝足够的水！</string>
+    <string name="notification_description">记住，水合作用对你的健康很重要 💧</string>
+    <string name="notification_permission_title">通知权限</string>
+    <string name="notification_permission_message">此应用程序需要发送通知，以提醒您每天的水摄入量。请授予权限。</string>
+    <string name="acept">接受</string>
+    <string name="cancel">取消</string>
+</resources>

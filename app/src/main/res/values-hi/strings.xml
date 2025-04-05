@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">HydroDaily</string>
+    <string-array name="activity_levels">
+        <item>अपनी शारीरिक गतिविधि स्तर चुनें</item>
+        <item>कम</item>
+        <item>मध्यम</item>
+        <item>उच्च</item>
+    </string-array>
+    <string-array name="Gender">
+        <item>अपना लिंग चुनें</item>
+        <item>महिला</item>
+        <item>पुरुष</item>
+    </string-array>
+    <string name="enter_weight">अपना वजन दर्ज करें (किलोग्राम)</string>
+    <string name="calculate_button">ड्रॉप पर क्लिक करें और आज का पानी सेवन कैल्कुलेट करें!</string>
+    <string name="result_preview_text">आपका दैनिक पानी सेवन यहां दिखेगा।</string>
+    <string name="valid_weight">कृपया प्रत्येक फ़ील्ड में उपयुक्त मान दर्ज करें।</string>
+    <string name="result_text">"आज आपको %1$s लीटर पानी पीना चाहिए।"</string>
+    <string name="spinner_hint">"अपना शारीरिक गतिविधि स्तर दर्ज करें।"</string>
+    <string name="notification_title">आज पर्याप्त पानी पीना न भूलें!</string>
+    <string name="notification_description">याद रखें कि हाइड्रेशन आपके स्वास्थ्य के लिए महत्वपूर्ण है 💧</string>
+    <string name="notification_permission_title">सूचना अनुमति</string>
+    <string name="notification_permission_message">इस ऐप को आपकी दैनिक जल सेवन की याद दिलाने के लिए सूचनाएँ भेजने की आवश्यकता है। कृपया अनुमति दें।</string>
+    <string name="acept">स्वीकार करें</string>
+    <string name="cancel">रद्द करें</string>
+</resources>

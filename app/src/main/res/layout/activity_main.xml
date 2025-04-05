@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout style="@style/linearWeight">
+
+        <ImageView
+            android:id="@+id/imageW8"
+            style="@style/imageWeight" />
+
+        <EditText
+            android:id="@+id/weightInput"
+            style="@style/wIntput" />
+
+    </LinearLayout>
+
+
+    <LinearLayout style="@style/linearActivity">
+
+        <ImageView
+            android:id="@+id/imageHeight"
+            style="@style/imageGender" />
+
+        <Spinner
+            android:id="@+id/genderSpinner"
+            style="@style/genderSpinner" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/linearActivity">
+
+        <ImageView
+            android:id="@+id/imageActivity"
+            style="@style/imageActivity" />
+
+        <Spinner
+            android:id="@+id/activityLevelSpinner"
+            style="@style/levelSpinner" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/linearButton">
+
+        <TextView
+            android:id="@+id/caltext"
+            style="@style/pressBtnTxt" />
+
+        <ImageButton
+            android:id="@+id/calculateButton"
+            style="@style/calButton" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/linearResult">
+
+        <TextView
+            android:id="@+id/resultText"
+            style="@style/resultTxt" />
+
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/linearAds">
+
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/bannerAds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+            />
+    </LinearLayout>
+
+</LinearLayout>

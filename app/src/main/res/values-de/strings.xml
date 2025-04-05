@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">HydroDaily</string>
+    <string-array name="activity_levels">
+        <item>Wählen Sie Ihr Aktivitätsniveau</item>
+        <item>Gering</item>
+        <item>Moderat</item>
+        <item>Hoch</item>
+    </string-array>
+    <string-array name="Gender">
+        <item>Wähle dein Geschlecht</item>
+        <item>Weiblich</item>
+        <item>Männlich</item>
+    </string-array>
+    <string name="enter_weight">Geben Sie Ihr Gewicht ein (kg)</string>
+    <string name="calculate_button">Drücken Sie auf den Tropfen und berechnen Sie Ihre tägliche Wasseraufnahme!</string>
+    <string name="result_preview_text">Ihre tägliche Wasseraufnahme wird hier angezeigt.</string>
+    <string name="valid_weight">Bitte geben Sie geeignete Werte in jedes Feld ein.</string>
+    <string name="result_text">"Heute sollten Sie %1$s Liter Wasser trinken."</string>
+    <string name="spinner_hint">"Geben Sie Ihr Aktivitätsniveau ein."</string>
+    <string name="notification_title">Vergiss nicht, heute genug Wasser zu trinken!</string>
+    <string name="notification_description">Denk daran, dass Hydration wichtig für deine Gesundheit ist 💧</string>
+    <string name="notification_permission_title">Benachrichtigungsberechtigung</string>
+    <string name="notification_permission_message">Diese App benötigt die Berechtigung, um Ihnen tägliche Erinnerungen an Ihre Wasseraufnahme zu senden. Bitte gewähren Sie die Berechtigung.</string>
+    <string name="acept">Akzeptieren</string>
+    <string name="cancel">Abbrechen</string>
+</resources>

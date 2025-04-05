@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">HydroDaily</string>
+    <string-array name="activity_levels">
+        <item>Choose your activity level</item>
+        <item>Low</item>
+        <item>Moderate</item>
+        <item>High</item>
+    </string-array>
+    <string-array name="Gender">
+        <item>Choose your gender</item>
+        <item>Female</item>
+        <item>Male</item>
+    </string-array>
+    <string name="enter_weight">Enter your weight (kg)</string>
+    <string name="calculate_button">Tap the drop and calculate your water intake for today!</string>
+    <string name="result_preview_text">Your daily water intake will appear here.</string>
+    <string name="valid_weight">Please enter appropriate values in each field.</string>
+    <string name="result_text">"Today you should drink %1$s liters of water."</string>
+    <string name="spinner_hint">"Enter your activity level."</string>
+    <string name="notification_title">Don\'t forget to drink enough water today!</string>
+    <string name="notification_description">Remember that hydration is important for your health 💧</string>
+    <string name="notification_permission_title">Notification Permission</string>
+    <string name="notification_permission_message">This app needs to send notifications to remind you of your daily water intake. Please grant the permission.</string>
+    <string name="acept">Accept</string>
+    <string name="cancel">Cancel</string>
+</resources>

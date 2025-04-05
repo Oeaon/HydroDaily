@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">HydroDaily</string>
+    <string-array name="activity_levels">
+        <item>اختر مستوى نشاطك البدني</item>
+        <item>منخفض</item>
+        <item>متوسط</item>
+        <item>عالي</item>
+    </string-array>
+    <string-array name="Gender">
+        <item>اختر جنسك</item>
+        <item>أنثى</item>
+        <item>ذكر</item>
+    </string-array>
+    <string name="enter_weight">أدخل وزنك (كجم)</string>
+    <string name="calculate_button">اضغط على النقطة و احسب كمية المياه التي يجب شربها اليوم!</string>
+    <string name="result_preview_text">سيتم عرض كمية المياه اليومية الخاصة بك هنا.</string>
+    <string name="valid_weight">من فضلك، أدخل قيمًا مناسبة في كل حقل.</string>
+    <string name="result_text">"اليوم يجب عليك شرب %1$s لتر من الماء."</string>
+    <string name="spinner_hint">"أدخل مستوى نشاطك البدني."</string>
+    <string name="notification_title">لا تنسى شرب ما يكفي من الماء اليوم!</string>
+    <string name="notification_description">تذكر أن الترطيب مهم لصحتك 💧</string>
+    <string name="notification_permission_title">إذن الإشعارات</string>
+    <string name="notification_permission_message">تحتاج هذه التطبيق لإرسال إشعارات لتذكيرك بمقدار الماء الذي يجب أن تشربه يوميًا. من فضلك، قم بمنح الإذن.</string>
+    <string name="acept">قبول</string>
+    <string name="cancel">إلغاء</string>
+</resources>

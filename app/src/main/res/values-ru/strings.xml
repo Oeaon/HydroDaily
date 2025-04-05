@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">HydroDaily</string>
+    <string-array name="activity_levels">
+        <item>Выберите уровень физической активности</item>
+        <item>Низкий</item>
+        <item>Умеренный</item>
+        <item>Высокий</item>
+    </string-array>
+    <string-array name="Gender">
+        <item>Выберите свой пол</item>
+        <item>Женский</item>
+        <item>Мужской</item>
+    </string-array>
+    <string name="enter_weight">Введите свой вес (кг)</string>
+    <string name="calculate_button">Нажмите на каплю, чтобы рассчитать свой сегодняшний водный баланс!</string>
+    <string name="result_preview_text">Ваш ежедневный водный баланс появится здесь.</string>
+    <string name="valid_weight">Пожалуйста, введите соответствующие значения в каждое поле.</string>
+    <string name="result_text">"Сегодня вам следует выпить %1$s литров воды."</string>
+    <string name="spinner_hint">"Введите уровень вашей физической активности."</string>
+    <string name="notification_title">Не забудьте выпить достаточно воды сегодня!</string>
+    <string name="notification_description">Помните, что гидратация важна для вашего здоровья 💧</string>
+    <string name="notification_permission_title">Разрешение на уведомления</string>
+    <string name="notification_permission_message">Это приложение должно отправлять уведомления, чтобы напомнить вам о вашем ежедневном потреблении воды. Пожалуйста, предоставьте разрешение.</string>
+    <string name="acept">Принять</string>
+    <string name="cancel">Отменить</string>
+</resources>
