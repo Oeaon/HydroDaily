@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Imagen para el estado presionado -->
-    <item android:state_pressed="true" android:drawable="@drawable/water_drop_btn_pressed" />
-
-    <!-- Imagen para el estado normal -->
-    <item android:drawable="@drawable/water_drop_btn" />
-</selector>

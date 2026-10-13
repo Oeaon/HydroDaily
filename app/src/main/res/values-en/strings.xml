@@ -1,26 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HydroDaily</string>
-    <string-array name="activity_levels">
-        <item>Choose your activity level</item>
-        <item>Low</item>
-        <item>Moderate</item>
-        <item>High</item>
-    </string-array>
-    <string-array name="Gender">
-        <item>Choose your gender</item>
-        <item>Female</item>
-        <item>Male</item>
-    </string-array>
-    <string name="enter_weight">Enter your weight (kg)</string>
-    <string name="calculate_button">Tap the drop and calculate your water intake for today!</string>
-    <string name="result_preview_text">Your daily water intake will appear here.</string>
-    <string name="valid_weight">Please enter appropriate values in each field.</string>
-    <string name="result_text">"Today you should drink %1$s liters of water."</string>
-    <string name="spinner_hint">"Enter your activity level."</string>
-    <string name="notification_title">Don\'t forget to drink enough water today!</string>
-    <string name="notification_description">Remember that hydration is important for your health 💧</string>
-    <string name="notification_permission_title">Notification Permission</string>
-    <string name="notification_permission_message">This app needs to send notifications to remind you of your daily water intake. Please grant the permission.</string>
-    <string name="acept">Accept</string>
-    <string name="cancel">Cancel</string>
+    <string name="nav_today">Today</string>
+    <string name="nav_profile">Profile</string>
+
+    <string name="today_title">Your hydration</string>
+    <string name="today_of_goal">of %1$s</string>
+    <string name="today_remaining">%1$s left to reach your goal</string>
+    <string name="today_goal_reached">Goal reached! Keep staying hydrated 💧</string>
+    <string name="today_add_title">Add water</string>
+    <string name="today_undo">Undo</string>
+    <string name="today_no_profile_title">Set up your profile</string>
+    <string name="today_no_profile_body">Calculate your daily water goal to start tracking what you drink.</string>
+    <string name="today_no_profile_action">Calculate my goal</string>
+    <string name="stat_goal">Goal</string>
+    <string name="stat_remaining">Left</string>
+    <string name="stat_entries">Entries</string>
+
+    <string name="profile_title">Your profile</string>
+    <string name="profile_subtitle">Find out how much water you need every day</string>
+    <string name="profile_weight_label">Weight</string>
+    <string name="profile_weight_error">Enter a weight between 20 and 300 kg</string>
+    <string name="profile_gender_label">Sex</string>
+    <string name="gender_female">Female</string>
+    <string name="gender_male">Male</string>
+    <string name="profile_gender_error">Select an option</string>
+    <string name="profile_activity_label">Physical activity</string>
+    <string name="activity_low">Low</string>
+    <string name="activity_moderate">Moderate</string>
+    <string name="activity_high">High</string>
+    <string name="activity_low_desc">Little or no exercise during the week.</string>
+    <string name="activity_moderate_desc">Exercise 3 to 5 days a week.</string>
+    <string name="activity_high_desc">Intense exercise almost every day.</string>
+    <string name="profile_activity_error">Select your activity level</string>
+    <string name="profile_calculate">Calculate my goal</string>
+    <string name="profile_goal_title">Your daily goal</string>
+    <string name="profile_goal_hint">This is an estimate. If you have specific health needs, please consult a healthcare professional.</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_reminders">Daily reminder</string>
+    <string name="settings_reminders_desc">We\'ll remind you every day at 12:00 PM</string>
+    <string name="settings_notifications_blocked">Notifications are turned off for this app.</string>
+    <string name="settings_enable">Turn on</string>
+    <string name="settings_privacy">Privacy options</string>
+
+    <string name="notification_title">Time to drink water! 💧</string>
+    <string name="notification_body_progress">You\'ve had %1$s of %2$s. Drink a glass now and keep going.</string>
+    <string name="notification_body_goal_reached">You\'ve already reached today\'s goal! Keep it up.</string>
+    <string name="notification_body_no_profile">Calculate your daily goal and start taking care of your hydration.</string>
+    <string name="reminder_channel_name">Daily reminder</string>
+    <string name="reminder_channel_description">Daily midday reminder to drink water.</string>
+    <string name="settings_exact_alarm">Allow exact alarms to get the reminder right at 12:00 PM.</string>
 </resources>

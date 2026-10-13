@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">HydroDaily</string>
+    <string name="reminder_channel_id" translatable="false">daily_reminder</string>
+    <string name="volume_ml" translatable="false">%1$s ml</string>
+    <string name="volume_l" translatable="false">%1$s L</string>
+    <string name="unit_kg" translatable="false">kg</string>
+    <string name="percent_value" translatable="false">%1$d%%</string>
+</resources>

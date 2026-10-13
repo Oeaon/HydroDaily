@@ -1,26 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HydroDaily</string>
-    <string-array name="activity_levels">
-        <item>اختر مستوى نشاطك البدني</item>
-        <item>منخفض</item>
-        <item>متوسط</item>
-        <item>عالي</item>
-    </string-array>
-    <string-array name="Gender">
-        <item>اختر جنسك</item>
-        <item>أنثى</item>
-        <item>ذكر</item>
-    </string-array>
-    <string name="enter_weight">أدخل وزنك (كجم)</string>
-    <string name="calculate_button">اضغط على النقطة و احسب كمية المياه التي يجب شربها اليوم!</string>
-    <string name="result_preview_text">سيتم عرض كمية المياه اليومية الخاصة بك هنا.</string>
-    <string name="valid_weight">من فضلك، أدخل قيمًا مناسبة في كل حقل.</string>
-    <string name="result_text">"اليوم يجب عليك شرب %1$s لتر من الماء."</string>
-    <string name="spinner_hint">"أدخل مستوى نشاطك البدني."</string>
-    <string name="notification_title">لا تنسى شرب ما يكفي من الماء اليوم!</string>
-    <string name="notification_description">تذكر أن الترطيب مهم لصحتك 💧</string>
-    <string name="notification_permission_title">إذن الإشعارات</string>
-    <string name="notification_permission_message">تحتاج هذه التطبيق لإرسال إشعارات لتذكيرك بمقدار الماء الذي يجب أن تشربه يوميًا. من فضلك، قم بمنح الإذن.</string>
-    <string name="acept">قبول</string>
-    <string name="cancel">إلغاء</string>
+    <string name="nav_today">اليوم</string>
+    <string name="nav_profile">الملف الشخصي</string>
+
+    <string name="today_title">ترطيبك اليومي</string>
+    <string name="today_of_goal">من %1$s</string>
+    <string name="today_remaining">تبقّى %1$s للوصول إلى هدفك</string>
+    <string name="today_goal_reached">تم تحقيق الهدف! استمر في شرب الماء 💧</string>
+    <string name="today_add_title">إضافة ماء</string>
+    <string name="today_undo">تراجع</string>
+    <string name="today_no_profile_title">أعدّ ملفك الشخصي</string>
+    <string name="today_no_profile_body">احسب هدفك اليومي من الماء لتبدأ بتسجيل ما تشربه.</string>
+    <string name="today_no_profile_action">احسب هدفي</string>
+    <string name="stat_goal">الهدف</string>
+    <string name="stat_remaining">المتبقي</string>
+    <string name="stat_entries">السجلات</string>
+
+    <string name="profile_title">ملفك الشخصي</string>
+    <string name="profile_subtitle">اعرف كمية الماء التي تحتاجها كل يوم</string>
+    <string name="profile_weight_label">الوزن</string>
+    <string name="profile_weight_error">أدخل وزنًا بين 20 و300 كغ</string>
+    <string name="profile_gender_label">الجنس</string>
+    <string name="gender_female">أنثى</string>
+    <string name="gender_male">ذكر</string>
+    <string name="profile_gender_error">اختر أحد الخيارات</string>
+    <string name="profile_activity_label">النشاط البدني</string>
+    <string name="activity_low">منخفض</string>
+    <string name="activity_moderate">متوسط</string>
+    <string name="activity_high">مرتفع</string>
+    <string name="activity_low_desc">تمارين قليلة أو بدون تمارين خلال الأسبوع.</string>
+    <string name="activity_moderate_desc">تمارين من 3 إلى 5 أيام في الأسبوع.</string>
+    <string name="activity_high_desc">تمارين مكثفة كل يوم تقريبًا.</string>
+    <string name="profile_activity_error">اختر مستوى نشاطك</string>
+    <string name="profile_calculate">احسب هدفي</string>
+    <string name="profile_goal_title">هدفك اليومي</string>
+    <string name="profile_goal_hint">هذا الحساب تقديري فقط. إذا كانت لديك احتياجات صحية خاصة، فاستشر أخصائيًا صحيًا.</string>
+
+    <string name="settings_title">الإعدادات</string>
+    <string name="settings_reminders">تذكير يومي</string>
+    <string name="settings_reminders_desc">سنذكّرك كل يوم الساعة 12:00 ظهرًا</string>
+    <string name="settings_notifications_blocked">الإشعارات متوقفة لهذا التطبيق.</string>
+    <string name="settings_enable">تفعيل</string>
+    <string name="settings_privacy">خيارات الخصوصية</string>
+
+    <string name="notification_title">حان وقت شرب الماء! 💧</string>
+    <string name="notification_body_progress">شربت %1$s من %2$s. اشرب كوبًا الآن واستمر.</string>
+    <string name="notification_body_goal_reached">لقد حققت هدف اليوم بالفعل! أحسنت، استمر.</string>
+    <string name="notification_body_no_profile">احسب هدفك اليومي وابدأ بالاهتمام بترطيب جسمك.</string>
+    <string name="reminder_channel_name">تذكير يومي</string>
+    <string name="reminder_channel_description">تذكير يومي عند الظهر لشرب الماء.</string>
+    <string name="settings_exact_alarm">اسمح بالمنبهات الدقيقة لتصلك التذكيرات في تمام الساعة 12:00.</string>
 </resources>

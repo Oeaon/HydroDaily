@@ -1,26 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HydroDaily</string>
-    <string-array name="activity_levels">
-        <item>Wählen Sie Ihr Aktivitätsniveau</item>
-        <item>Gering</item>
-        <item>Moderat</item>
-        <item>Hoch</item>
-    </string-array>
-    <string-array name="Gender">
-        <item>Wähle dein Geschlecht</item>
-        <item>Weiblich</item>
-        <item>Männlich</item>
-    </string-array>
-    <string name="enter_weight">Geben Sie Ihr Gewicht ein (kg)</string>
-    <string name="calculate_button">Drücken Sie auf den Tropfen und berechnen Sie Ihre tägliche Wasseraufnahme!</string>
-    <string name="result_preview_text">Ihre tägliche Wasseraufnahme wird hier angezeigt.</string>
-    <string name="valid_weight">Bitte geben Sie geeignete Werte in jedes Feld ein.</string>
-    <string name="result_text">"Heute sollten Sie %1$s Liter Wasser trinken."</string>
-    <string name="spinner_hint">"Geben Sie Ihr Aktivitätsniveau ein."</string>
-    <string name="notification_title">Vergiss nicht, heute genug Wasser zu trinken!</string>
-    <string name="notification_description">Denk daran, dass Hydration wichtig für deine Gesundheit ist 💧</string>
-    <string name="notification_permission_title">Benachrichtigungsberechtigung</string>
-    <string name="notification_permission_message">Diese App benötigt die Berechtigung, um Ihnen tägliche Erinnerungen an Ihre Wasseraufnahme zu senden. Bitte gewähren Sie die Berechtigung.</string>
-    <string name="acept">Akzeptieren</string>
-    <string name="cancel">Abbrechen</string>
+    <string name="nav_today">Heute</string>
+    <string name="nav_profile">Profil</string>
+
+    <string name="today_title">Deine Hydration</string>
+    <string name="today_of_goal">von %1$s</string>
+    <string name="today_remaining">Noch %1$s bis zu deinem Ziel</string>
+    <string name="today_goal_reached">Ziel erreicht! Trink weiter genug 💧</string>
+    <string name="today_add_title">Wasser hinzufügen</string>
+    <string name="today_undo">Rückgängig</string>
+    <string name="today_no_profile_title">Profil einrichten</string>
+    <string name="today_no_profile_body">Berechne dein tägliches Wasserziel, um mit dem Erfassen zu beginnen.</string>
+    <string name="today_no_profile_action">Mein Ziel berechnen</string>
+    <string name="stat_goal">Ziel</string>
+    <string name="stat_remaining">Übrig</string>
+    <string name="stat_entries">Einträge</string>
+
+    <string name="profile_title">Dein Profil</string>
+    <string name="profile_subtitle">Finde heraus, wie viel Wasser du täglich brauchst</string>
+    <string name="profile_weight_label">Gewicht</string>
+    <string name="profile_weight_error">Gib ein Gewicht zwischen 20 und 300 kg ein</string>
+    <string name="profile_gender_label">Geschlecht</string>
+    <string name="gender_female">Frau</string>
+    <string name="gender_male">Mann</string>
+    <string name="profile_gender_error">Wähle eine Option</string>
+    <string name="profile_activity_label">Körperliche Aktivität</string>
+    <string name="activity_low">Niedrig</string>
+    <string name="activity_moderate">Mittel</string>
+    <string name="activity_high">Hoch</string>
+    <string name="activity_low_desc">Wenig oder kein Sport pro Woche.</string>
+    <string name="activity_moderate_desc">Sport an 3 bis 5 Tagen pro Woche.</string>
+    <string name="activity_high_desc">Intensiver Sport fast jeden Tag.</string>
+    <string name="profile_activity_error">Wähle dein Aktivitätsniveau</string>
+    <string name="profile_calculate">Mein Ziel berechnen</string>
+    <string name="profile_goal_title">Dein Tagesziel</string>
+    <string name="profile_goal_hint">Diese Berechnung ist ein Richtwert. Bei besonderen gesundheitlichen Bedürfnissen wende dich an medizinisches Fachpersonal.</string>
+
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_reminders">Tägliche Erinnerung</string>
+    <string name="settings_reminders_desc">Wir erinnern dich jeden Tag um 12:00 Uhr</string>
+    <string name="settings_notifications_blocked">Benachrichtigungen sind für diese App deaktiviert.</string>
+    <string name="settings_enable">Aktivieren</string>
+    <string name="settings_privacy">Datenschutzoptionen</string>
+
+    <string name="notification_title">Zeit, Wasser zu trinken! 💧</string>
+    <string name="notification_body_progress">Du hast %1$s von %2$s getrunken. Trink jetzt ein Glas und mach weiter.</string>
+    <string name="notification_body_goal_reached">Du hast dein heutiges Ziel schon erreicht! Weiter so.</string>
+    <string name="notification_body_no_profile">Berechne dein Tagesziel und achte auf deine Hydration.</string>
+    <string name="reminder_channel_name">Tägliche Erinnerung</string>
+    <string name="reminder_channel_description">Tägliche Erinnerung zur Mittagszeit, Wasser zu trinken.</string>
+    <string name="settings_exact_alarm">Erlaube exakte Wecker, damit die Erinnerung pünktlich um 12:00 Uhr kommt.</string>
 </resources>

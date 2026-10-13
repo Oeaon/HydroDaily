@@ -1,26 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HydroDaily</string>
-    <string-array name="activity_levels">
-        <item>अपनी शारीरिक गतिविधि स्तर चुनें</item>
-        <item>कम</item>
-        <item>मध्यम</item>
-        <item>उच्च</item>
-    </string-array>
-    <string-array name="Gender">
-        <item>अपना लिंग चुनें</item>
-        <item>महिला</item>
-        <item>पुरुष</item>
-    </string-array>
-    <string name="enter_weight">अपना वजन दर्ज करें (किलोग्राम)</string>
-    <string name="calculate_button">ड्रॉप पर क्लिक करें और आज का पानी सेवन कैल्कुलेट करें!</string>
-    <string name="result_preview_text">आपका दैनिक पानी सेवन यहां दिखेगा।</string>
-    <string name="valid_weight">कृपया प्रत्येक फ़ील्ड में उपयुक्त मान दर्ज करें।</string>
-    <string name="result_text">"आज आपको %1$s लीटर पानी पीना चाहिए।"</string>
-    <string name="spinner_hint">"अपना शारीरिक गतिविधि स्तर दर्ज करें।"</string>
-    <string name="notification_title">आज पर्याप्त पानी पीना न भूलें!</string>
-    <string name="notification_description">याद रखें कि हाइड्रेशन आपके स्वास्थ्य के लिए महत्वपूर्ण है 💧</string>
-    <string name="notification_permission_title">सूचना अनुमति</string>
-    <string name="notification_permission_message">इस ऐप को आपकी दैनिक जल सेवन की याद दिलाने के लिए सूचनाएँ भेजने की आवश्यकता है। कृपया अनुमति दें।</string>
-    <string name="acept">स्वीकार करें</string>
-    <string name="cancel">रद्द करें</string>
+    <string name="nav_today">आज</string>
+    <string name="nav_profile">प्रोफ़ाइल</string>
+
+    <string name="today_title">आपका हाइड्रेशन</string>
+    <string name="today_of_goal">%1$s में से</string>
+    <string name="today_remaining">लक्ष्य तक पहुँचने के लिए %1$s बाकी</string>
+    <string name="today_goal_reached">लक्ष्य पूरा हुआ! पानी पीते रहें 💧</string>
+    <string name="today_add_title">पानी जोड़ें</string>
+    <string name="today_undo">पूर्ववत करें</string>
+    <string name="today_no_profile_title">अपनी प्रोफ़ाइल सेट करें</string>
+    <string name="today_no_profile_body">आप कितना पानी पीते हैं, यह दर्ज करना शुरू करने के लिए अपना दैनिक लक्ष्य निकालें।</string>
+    <string name="today_no_profile_action">मेरा लक्ष्य निकालें</string>
+    <string name="stat_goal">लक्ष्य</string>
+    <string name="stat_remaining">बाकी</string>
+    <string name="stat_entries">प्रविष्टियाँ</string>
+
+    <string name="profile_title">आपकी प्रोफ़ाइल</string>
+    <string name="profile_subtitle">जानें कि आपको रोज़ कितने पानी की ज़रूरत है</string>
+    <string name="profile_weight_label">वज़न</string>
+    <string name="profile_weight_error">20 से 300 किलो के बीच वज़न दर्ज करें</string>
+    <string name="profile_gender_label">लिंग</string>
+    <string name="gender_female">महिला</string>
+    <string name="gender_male">पुरुष</string>
+    <string name="profile_gender_error">एक विकल्प चुनें</string>
+    <string name="profile_activity_label">शारीरिक गतिविधि</string>
+    <string name="activity_low">कम</string>
+    <string name="activity_moderate">मध्यम</string>
+    <string name="activity_high">अधिक</string>
+    <string name="activity_low_desc">सप्ताह में बहुत कम या कोई व्यायाम नहीं।</string>
+    <string name="activity_moderate_desc">सप्ताह में 3 से 5 दिन व्यायाम।</string>
+    <string name="activity_high_desc">लगभग हर दिन तीव्र व्यायाम।</string>
+    <string name="profile_activity_error">अपना गतिविधि स्तर चुनें</string>
+    <string name="profile_calculate">मेरा लक्ष्य निकालें</string>
+    <string name="profile_goal_title">आपका दैनिक लक्ष्य</string>
+    <string name="profile_goal_hint">यह गणना केवल अनुमान है। यदि आपकी कोई विशेष स्वास्थ्य ज़रूरत है, तो किसी स्वास्थ्य विशेषज्ञ से सलाह लें।</string>
+
+    <string name="settings_title">सेटिंग्स</string>
+    <string name="settings_reminders">दैनिक रिमाइंडर</string>
+    <string name="settings_reminders_desc">हम आपको हर दिन दोपहर 12:00 बजे याद दिलाएँगे</string>
+    <string name="settings_notifications_blocked">इस ऐप के लिए सूचनाएँ बंद हैं।</string>
+    <string name="settings_enable">चालू करें</string>
+    <string name="settings_privacy">गोपनीयता विकल्प</string>
+
+    <string name="notification_title">पानी पीने का समय! 💧</string>
+    <string name="notification_body_progress">आपने %2$s में से %1$s पानी पिया है। अभी एक गिलास पिएँ और जारी रखें।</string>
+    <string name="notification_body_goal_reached">आपने आज का लक्ष्य पूरा कर लिया है! ऐसे ही जारी रखें।</string>
+    <string name="notification_body_no_profile">अपना दैनिक लक्ष्य निकालें और अपने हाइड्रेशन का ध्यान रखें।</string>
+    <string name="reminder_channel_name">दैनिक रिमाइंडर</string>
+    <string name="reminder_channel_description">पानी पीने के लिए हर दिन दोपहर का रिमाइंडर।</string>
+    <string name="settings_exact_alarm">दोपहर 12:00 बजे समय पर रिमाइंडर पाने के लिए सटीक अलार्म की अनुमति दें।</string>
 </resources>

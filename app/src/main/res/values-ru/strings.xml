@@ -1,26 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HydroDaily</string>
-    <string-array name="activity_levels">
-        <item>Выберите уровень физической активности</item>
-        <item>Низкий</item>
-        <item>Умеренный</item>
-        <item>Высокий</item>
-    </string-array>
-    <string-array name="Gender">
-        <item>Выберите свой пол</item>
-        <item>Женский</item>
-        <item>Мужской</item>
-    </string-array>
-    <string name="enter_weight">Введите свой вес (кг)</string>
-    <string name="calculate_button">Нажмите на каплю, чтобы рассчитать свой сегодняшний водный баланс!</string>
-    <string name="result_preview_text">Ваш ежедневный водный баланс появится здесь.</string>
-    <string name="valid_weight">Пожалуйста, введите соответствующие значения в каждое поле.</string>
-    <string name="result_text">"Сегодня вам следует выпить %1$s литров воды."</string>
-    <string name="spinner_hint">"Введите уровень вашей физической активности."</string>
-    <string name="notification_title">Не забудьте выпить достаточно воды сегодня!</string>
-    <string name="notification_description">Помните, что гидратация важна для вашего здоровья 💧</string>
-    <string name="notification_permission_title">Разрешение на уведомления</string>
-    <string name="notification_permission_message">Это приложение должно отправлять уведомления, чтобы напомнить вам о вашем ежедневном потреблении воды. Пожалуйста, предоставьте разрешение.</string>
-    <string name="acept">Принять</string>
-    <string name="cancel">Отменить</string>
+    <string name="nav_today">Сегодня</string>
+    <string name="nav_profile">Профиль</string>
+
+    <string name="today_title">Ваш водный баланс</string>
+    <string name="today_of_goal">из %1$s</string>
+    <string name="today_remaining">До цели осталось %1$s</string>
+    <string name="today_goal_reached">Цель достигнута! Продолжайте пить воду 💧</string>
+    <string name="today_add_title">Добавить воду</string>
+    <string name="today_undo">Отменить</string>
+    <string name="today_no_profile_title">Настройте профиль</string>
+    <string name="today_no_profile_body">Рассчитайте дневную норму воды, чтобы начать отслеживать, сколько вы пьёте.</string>
+    <string name="today_no_profile_action">Рассчитать норму</string>
+    <string name="stat_goal">Цель</string>
+    <string name="stat_remaining">Осталось</string>
+    <string name="stat_entries">Записи</string>
+
+    <string name="profile_title">Ваш профиль</string>
+    <string name="profile_subtitle">Узнайте, сколько воды вам нужно каждый день</string>
+    <string name="profile_weight_label">Вес</string>
+    <string name="profile_weight_error">Введите вес от 20 до 300 кг</string>
+    <string name="profile_gender_label">Пол</string>
+    <string name="gender_female">Женский</string>
+    <string name="gender_male">Мужской</string>
+    <string name="profile_gender_error">Выберите вариант</string>
+    <string name="profile_activity_label">Физическая активность</string>
+    <string name="activity_low">Низкая</string>
+    <string name="activity_moderate">Средняя</string>
+    <string name="activity_high">Высокая</string>
+    <string name="activity_low_desc">Мало или совсем нет тренировок в неделю.</string>
+    <string name="activity_moderate_desc">Тренировки 3–5 дней в неделю.</string>
+    <string name="activity_high_desc">Интенсивные тренировки почти каждый день.</string>
+    <string name="profile_activity_error">Выберите уровень активности</string>
+    <string name="profile_calculate">Рассчитать норму</string>
+    <string name="profile_goal_title">Ваша дневная норма</string>
+    <string name="profile_goal_hint">Этот расчёт носит ориентировочный характер. При особых потребностях здоровья проконсультируйтесь со специалистом.</string>
+
+    <string name="settings_title">Настройки</string>
+    <string name="settings_reminders">Ежедневное напоминание</string>
+    <string name="settings_reminders_desc">Мы будем напоминать вам каждый день в 12:00</string>
+    <string name="settings_notifications_blocked">Уведомления для этого приложения отключены.</string>
+    <string name="settings_enable">Включить</string>
+    <string name="settings_privacy">Настройки конфиденциальности</string>
+
+    <string name="notification_title">Пора выпить воды! 💧</string>
+    <string name="notification_body_progress">Вы выпили %1$s из %2$s. Выпейте стакан сейчас и продолжайте.</string>
+    <string name="notification_body_goal_reached">Вы уже достигли сегодняшней цели! Так держать.</string>
+    <string name="notification_body_no_profile">Рассчитайте дневную норму и начните заботиться о водном балансе.</string>
+    <string name="reminder_channel_name">Ежедневное напоминание</string>
+    <string name="reminder_channel_description">Ежедневное напоминание в полдень выпить воды.</string>
+    <string name="settings_exact_alarm">Разрешите точные будильники, чтобы получать напоминание ровно в 12:00.</string>
 </resources>

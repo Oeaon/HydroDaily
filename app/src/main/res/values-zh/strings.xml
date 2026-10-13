@@ -1,26 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HydroDaily</string>
-    <string-array name="activity_levels">
-        <item>选择您的身体活动水平</item>
-        <item>低</item>
-        <item>中等</item>
-        <item>高</item>
-    </string-array>
-    <string-array name="Gender">
-        <item>选择您的性别</item>
-        <item>女性</item>
-        <item>男性</item>
-    </string-array>
-    <string name="enter_weight">输入您的体重（千克）</string>
-    <string name="calculate_button">点击水滴，计算今天的饮水量！</string>
-    <string name="result_preview_text">您的每日饮水量将在这里显示。</string>
-    <string name="valid_weight">请在每个字段中输入适当的值。</string>
-    <string name="result_text">"今天您应该喝 %1$s 升水。"</string>
-    <string name="spinner_hint">"请输入您的活动水平。"</string>
-    <string name="notification_title">今天别忘了喝足够的水！</string>
-    <string name="notification_description">记住，水合作用对你的健康很重要 💧</string>
-    <string name="notification_permission_title">通知权限</string>
-    <string name="notification_permission_message">此应用程序需要发送通知，以提醒您每天的水摄入量。请授予权限。</string>
-    <string name="acept">接受</string>
-    <string name="cancel">取消</string>
+    <string name="nav_today">今天</string>
+    <string name="nav_profile">个人资料</string>
+
+    <string name="today_title">你的饮水情况</string>
+    <string name="today_of_goal">目标 %1$s</string>
+    <string name="today_remaining">距离目标还差 %1$s</string>
+    <string name="today_goal_reached">目标已达成！继续保持水分 💧</string>
+    <string name="today_add_title">添加饮水</string>
+    <string name="today_undo">撤销</string>
+    <string name="today_no_profile_title">设置个人资料</string>
+    <string name="today_no_profile_body">计算你的每日饮水目标，开始记录你的饮水量。</string>
+    <string name="today_no_profile_action">计算我的目标</string>
+    <string name="stat_goal">目标</string>
+    <string name="stat_remaining">剩余</string>
+    <string name="stat_entries">记录</string>
+
+    <string name="profile_title">个人资料</string>
+    <string name="profile_subtitle">了解你每天需要喝多少水</string>
+    <string name="profile_weight_label">体重</string>
+    <string name="profile_weight_error">请输入 20 到 300 公斤之间的体重</string>
+    <string name="profile_gender_label">性别</string>
+    <string name="gender_female">女</string>
+    <string name="gender_male">男</string>
+    <string name="profile_gender_error">请选择一个选项</string>
+    <string name="profile_activity_label">运动量</string>
+    <string name="activity_low">低</string>
+    <string name="activity_moderate">中等</string>
+    <string name="activity_high">高</string>
+    <string name="activity_low_desc">每周很少或不运动。</string>
+    <string name="activity_moderate_desc">每周运动 3 到 5 天。</string>
+    <string name="activity_high_desc">几乎每天进行高强度运动。</string>
+    <string name="profile_activity_error">请选择你的运动量</string>
+    <string name="profile_calculate">计算我的目标</string>
+    <string name="profile_goal_title">你的每日目标</string>
+    <string name="profile_goal_hint">此计算仅供参考。如有特殊健康需求，请咨询专业医疗人员。</string>
+
+    <string name="settings_title">设置</string>
+    <string name="settings_reminders">每日提醒</string>
+    <string name="settings_reminders_desc">我们会在每天 12:00 提醒你</string>
+    <string name="settings_notifications_blocked">此应用的通知已关闭。</string>
+    <string name="settings_enable">开启</string>
+    <string name="settings_privacy">隐私选项</string>
+
+    <string name="notification_title">该喝水啦！💧</string>
+    <string name="notification_body_progress">你已喝了 %1$s，目标 %2$s。现在喝一杯，继续加油。</string>
+    <string name="notification_body_goal_reached">你已完成今天的目标！继续保持。</string>
+    <string name="notification_body_no_profile">计算你的每日目标，开始关注你的水分补充。</string>
+    <string name="reminder_channel_name">每日提醒</string>
+    <string name="reminder_channel_description">每天中午提醒你喝水。</string>
+    <string name="settings_exact_alarm">允许精确闹钟，以便在 12:00 准时收到提醒。</string>
 </resources>
