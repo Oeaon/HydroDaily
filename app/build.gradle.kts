@@ -26,8 +26,8 @@ android {
         applicationId = "com.oeaon.hydrodaily"
         minSdk = 24
         targetSdk = 36
-        versionCode = 10
-        versionName = "2.0"
+        versionCode = 11
+        versionName = "2.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -101,6 +101,8 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.messaging)
+    implementation(libs.firebase.analytics)
+    implementation(libs.play.review)
     implementation(libs.play.services.ads)
     implementation(libs.user.messaging.platform)
 

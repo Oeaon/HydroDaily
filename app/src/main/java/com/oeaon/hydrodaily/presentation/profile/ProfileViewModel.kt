@@ -4,10 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oeaon.hydrodaily.domain.model.ActivityLevel
 import com.oeaon.hydrodaily.domain.model.Gender
+import com.oeaon.hydrodaily.domain.model.ReminderFrequency
+import com.oeaon.hydrodaily.domain.model.ReminderSettings
 import com.oeaon.hydrodaily.domain.repository.ProfileRepository
 import com.oeaon.hydrodaily.domain.repository.SettingsRepository
 import com.oeaon.hydrodaily.domain.usecase.SaveProfileUseCase
-import com.oeaon.hydrodaily.domain.usecase.SetRemindersEnabledUseCase
+import com.oeaon.hydrodaily.domain.usecase.SetAnalyticsEnabledUseCase
+import com.oeaon.hydrodaily.domain.usecase.UpdateReminderSettingsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -20,6 +23,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.DayOfWeek
+import java.time.LocalTime
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,7 +32,8 @@ class ProfileViewModel @Inject constructor(
     private val profileRepository: ProfileRepository,
     settingsRepository: SettingsRepository,
     private val saveProfile: SaveProfileUseCase,
-    private val setRemindersEnabled: SetRemindersEnabledUseCase
+    private val updateReminderSettings: UpdateReminderSettingsUseCase,
+    private val setAnalyticsEnabled: SetAnalyticsEnabledUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ProfileUiState())
@@ -49,8 +55,11 @@ class ProfileViewModel @Inject constructor(
                 )
             }
         }
-        settingsRepository.remindersEnabled
-            .onEach { enabled -> _uiState.update { it.copy(remindersEnabled = enabled) } }
+        settingsRepository.reminderSettings
+            .onEach { settings -> _uiState.update { it.copy(reminders = settings) } }
+            .launchIn(viewModelScope)
+        settingsRepository.analyticsEnabled
+            .onEach { enabled -> _uiState.update { it.copy(analyticsEnabled = enabled) } }
             .launchIn(viewModelScope)
     }
 
@@ -83,8 +92,26 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun onRemindersToggled(enabled: Boolean) {
-        viewModelScope.launch { setRemindersEnabled(enabled) }
+    fun onRemindersToggled(enabled: Boolean) = updateReminders { it.copy(enabled = enabled) }
+
+    fun onReminderStartTimeChange(time: LocalTime) = updateReminders { it.copy(startTime = time) }
+
+    fun onReminderEndTimeChange(time: LocalTime) = updateReminders { it.copy(endTime = time) }
+
+    fun onReminderFrequencyChange(frequency: ReminderFrequency) = updateReminders { it.copy(frequency = frequency) }
+
+    fun onReminderDayToggled(day: DayOfWeek) = updateReminders { settings ->
+        settings.copy(days = if (day in settings.days) settings.days - day else settings.days + day)
+    }
+
+    fun onSkipWhenGoalReachedToggled(skip: Boolean) = updateReminders { it.copy(skipWhenGoalReached = skip) }
+
+    fun onAnalyticsToggled(enabled: Boolean) {
+        viewModelScope.launch { setAnalyticsEnabled(enabled) }
+    }
+
+    private fun updateReminders(transform: (ReminderSettings) -> ReminderSettings) {
+        viewModelScope.launch { updateReminderSettings(transform) }
     }
 
     private fun formatWeight(weight: Double): String =
@@ -104,7 +131,8 @@ data class ProfileUiState(
     val activityError: Boolean = false,
     val savedGoalMl: Int? = null,
     val isEditing: Boolean = true,
-    val remindersEnabled: Boolean = true
+    val reminders: ReminderSettings = ReminderSettings(),
+    val analyticsEnabled: Boolean = true
 )
 
 sealed interface ProfileEvent {

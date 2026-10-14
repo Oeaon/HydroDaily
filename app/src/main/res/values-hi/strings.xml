@@ -37,8 +37,7 @@
     <string name="profile_goal_hint">यह गणना केवल अनुमान है। यदि आपकी कोई विशेष स्वास्थ्य ज़रूरत है, तो किसी स्वास्थ्य विशेषज्ञ से सलाह लें।</string>
 
     <string name="settings_title">सेटिंग्स</string>
-    <string name="settings_reminders">दैनिक रिमाइंडर</string>
-    <string name="settings_reminders_desc">हम आपको हर दिन दोपहर 12:00 बजे याद दिलाएँगे</string>
+    <string name="settings_reminders">रिमाइंडर पाएँ</string>
     <string name="settings_notifications_blocked">इस ऐप के लिए सूचनाएँ बंद हैं।</string>
     <string name="settings_enable">चालू करें</string>
     <string name="settings_privacy">गोपनीयता विकल्प</string>
@@ -47,7 +46,41 @@
     <string name="notification_body_progress">आपने %2$s में से %1$s पानी पिया है। अभी एक गिलास पिएँ और जारी रखें।</string>
     <string name="notification_body_goal_reached">आपने आज का लक्ष्य पूरा कर लिया है! ऐसे ही जारी रखें।</string>
     <string name="notification_body_no_profile">अपना दैनिक लक्ष्य निकालें और अपने हाइड्रेशन का ध्यान रखें।</string>
-    <string name="reminder_channel_name">दैनिक रिमाइंडर</string>
-    <string name="reminder_channel_description">पानी पीने के लिए हर दिन दोपहर का रिमाइंडर।</string>
-    <string name="settings_exact_alarm">दोपहर 12:00 बजे समय पर रिमाइंडर पाने के लिए सटीक अलार्म की अनुमति दें।</string>
+    <string name="reminder_channel_name">रिमाइंडर</string>
+    <string name="reminder_channel_description">पानी पीने की याद दिलाने वाली सूचनाएँ।</string>
+    <string name="settings_exact_alarm">चुने गए समय पर रिमाइंडर पाने के लिए सटीक अलार्म की अनुमति दें।</string>
+
+    <string name="streak_none">अभी कोई स्ट्रीक नहीं</string>
+    <string name="streak_start_hint">स्ट्रीक शुरू करने के लिए आज अपना लक्ष्य पूरा करें।</string>
+    <string name="streak_keep_hint">इसे जारी रखने के लिए आज अपना लक्ष्य पूरा करें।</string>
+    <string name="streak_completed_today">आज आपने एक और दिन जोड़ लिया!</string>
+    <string name="streak_best">सर्वश्रेष्ठ</string>
+    <string name="notification_action_add">%1$s जोड़ें</string>
+    <string name="reminders_title">रिमाइंडर</string>
+    <string name="reminder_summary_off">बंद</string>
+    <string name="reminder_summary_no_days">कम से कम एक दिन चुनें</string>
+    <string name="reminder_summary_once">%1$s बजे</string>
+    <string name="reminder_summary_interval">हर %1$s, %2$s से %3$s तक</string>
+    <string name="reminder_summary_every_day">हर दिन</string>
+    <string name="reminder_frequency">आवृत्ति</string>
+    <string name="reminder_frequency_once">दिन में एक बार</string>
+    <string name="duration_hours">%1$d घंटे</string>
+    <string name="duration_hours_minutes">%1$d घंटे %2$d मिनट</string>
+    <string name="reminder_time">समय</string>
+    <string name="reminder_from">से</string>
+    <string name="reminder_until">तक</string>
+    <string name="reminder_days">दिन</string>
+    <string name="reminder_skip_when_reached">लक्ष्य पूरा होने पर म्यूट करें</string>
+    <string name="reminder_skip_when_reached_desc">उस दिन आपको और रिमाइंडर नहीं मिलेंगे।</string>
+    <string name="reminder_sound_settings">ध्वनि और वाइब्रेशन</string>
+    <string name="settings_analytics">उपयोग के आँकड़े</string>
+    <string name="settings_analytics_desc">ऐप को बेहतर बनाने में हमारी मदद के लिए उपयोग डेटा साझा करें।</string>
+    <plurals name="streak_current">
+        <item quantity="one">लगातार %d दिन</item>
+        <item quantity="other">लगातार %d दिन</item>
+    </plurals>
+    <plurals name="notification_body_streak">
+        <item quantity="one">आपने %2$s में से %1$s पी लिया है। अपनी %3$d दिन की स्ट्रीक न टूटने दें!</item>
+        <item quantity="other">आपने %2$s में से %1$s पी लिया है। अपनी %3$d दिन की स्ट्रीक न टूटने दें!</item>
+    </plurals>
 </resources>

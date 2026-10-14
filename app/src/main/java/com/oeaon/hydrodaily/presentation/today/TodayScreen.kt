@@ -32,14 +32,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -58,12 +62,22 @@ private val QuickAmountsMl = listOf(150, 250, 330, 500)
 @Composable
 fun TodayRoute(
     onSetUpProfile: () -> Unit,
+    onRequestReview: () -> Unit,
     contentPadding: PaddingValues,
     viewModel: TodayViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val playDrop = rememberDropSound()
     val haptics = LocalHapticFeedback.current
+    val currentOnRequestReview by rememberUpdatedState(onRequestReview)
+
+    LaunchedEffect(viewModel) {
+        viewModel.events.collect { event ->
+            when (event) {
+                TodayEvent.RequestReview -> currentOnRequestReview()
+            }
+        }
+    }
 
     TodayScreen(
         state = state,
@@ -102,6 +116,7 @@ fun TodayScreen(
             !state.hasProfile -> SetUpProfileCard(onSetUpProfile)
             else -> {
                 ProgressSection(state)
+                StreakCard(state)
                 StatsRow(state)
                 QuickAddSection(canUndo = state.canUndo, onAddWater = onAddWater, onUndo = onUndo)
             }
@@ -191,6 +206,67 @@ private fun ProgressSection(state: TodayUiState) {
             color = if (state.isGoalReached) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
+    }
+}
+
+@Composable
+private fun StreakCard(state: TodayUiState) {
+    val active = state.currentStreak > 0
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = if (state.streakCompletedToday) {
+                MaterialTheme.colorScheme.tertiaryContainer
+            } else {
+                MaterialTheme.colorScheme.surfaceContainerLow
+            }
+        ),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.streak_emoji),
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.alpha(if (active) 1f else 0.4f)
+            )
+            Column(Modifier.weight(1f)) {
+                Text(
+                    text = if (active) {
+                        pluralStringResource(R.plurals.streak_current, state.currentStreak, state.currentStreak)
+                    } else {
+                        stringResource(R.string.streak_none)
+                    },
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    text = when {
+                        !active -> stringResource(R.string.streak_start_hint)
+                        state.streakCompletedToday -> stringResource(R.string.streak_completed_today)
+                        else -> stringResource(R.string.streak_keep_hint)
+                    },
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            if (state.bestStreak > 0) {
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(
+                        text = stringResource(R.string.streak_best),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        text = state.bestStreak.toString(),
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
+        }
     }
 }
 
@@ -327,7 +403,6 @@ private fun SetUpProfileCard(onSetUpProfile: () -> Unit) {
         }
     }
 }
-
 
 @Composable
 private fun rememberDropSound(): () -> Unit {

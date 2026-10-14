@@ -1,11 +1,15 @@
 package com.oeaon.hydrodaily.di
 
+import com.oeaon.hydrodaily.data.analytics.FirebaseAnalyticsTracker
+import com.oeaon.hydrodaily.data.repository.DataStoreGoalHistoryRepository
 import com.oeaon.hydrodaily.data.repository.DataStoreIntakeRepository
 import com.oeaon.hydrodaily.data.repository.DataStoreProfileRepository
 import com.oeaon.hydrodaily.data.repository.DataStoreSettingsRepository
 import com.oeaon.hydrodaily.data.time.SystemTimeProvider
 import com.oeaon.hydrodaily.domain.TimeProvider
+import com.oeaon.hydrodaily.domain.analytics.AnalyticsTracker
 import com.oeaon.hydrodaily.domain.reminder.ReminderScheduler
+import com.oeaon.hydrodaily.domain.repository.GoalHistoryRepository
 import com.oeaon.hydrodaily.domain.repository.IntakeRepository
 import com.oeaon.hydrodaily.domain.repository.ProfileRepository
 import com.oeaon.hydrodaily.domain.repository.SettingsRepository
@@ -27,6 +31,12 @@ abstract class BindingsModule {
 
     @Binds
     abstract fun bindSettingsRepository(impl: DataStoreSettingsRepository): SettingsRepository
+
+    @Binds
+    abstract fun bindGoalHistoryRepository(impl: DataStoreGoalHistoryRepository): GoalHistoryRepository
+
+    @Binds
+    abstract fun bindAnalyticsTracker(impl: FirebaseAnalyticsTracker): AnalyticsTracker
 
     @Binds
     abstract fun bindTimeProvider(impl: SystemTimeProvider): TimeProvider

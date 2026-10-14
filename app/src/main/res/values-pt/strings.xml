@@ -37,8 +37,7 @@
     <string name="profile_goal_hint">Este cálculo é apenas uma estimativa. Se você tiver necessidades de saúde específicas, consulte um profissional de saúde.</string>
 
     <string name="settings_title">Configurações</string>
-    <string name="settings_reminders">Lembrete diário</string>
-    <string name="settings_reminders_desc">Vamos lembrar você todos os dias às 12:00</string>
+    <string name="settings_reminders">Receber lembretes</string>
     <string name="settings_notifications_blocked">As notificações estão desativadas para este app.</string>
     <string name="settings_enable">Ativar</string>
     <string name="settings_privacy">Opções de privacidade</string>
@@ -47,7 +46,43 @@
     <string name="notification_body_progress">Você já bebeu %1$s de %2$s. Beba um copo agora e continue.</string>
     <string name="notification_body_goal_reached">Você já atingiu a meta de hoje! Continue assim.</string>
     <string name="notification_body_no_profile">Calcule sua meta diária e comece a cuidar da sua hidratação.</string>
-    <string name="reminder_channel_name">Lembrete diário</string>
-    <string name="reminder_channel_description">Lembrete diário ao meio-dia para beber água.</string>
-    <string name="settings_exact_alarm">Permita alarmes exatos para receber o lembrete pontualmente às 12:00.</string>
+    <string name="reminder_channel_name">Lembretes</string>
+    <string name="reminder_channel_description">Notificações para lembrar você de beber água.</string>
+    <string name="settings_exact_alarm">Permita alarmes exatos para receber os lembretes no horário escolhido.</string>
+
+    <string name="streak_none">Ainda sem sequência</string>
+    <string name="streak_start_hint">Alcance sua meta hoje para começar uma sequência.</string>
+    <string name="streak_keep_hint">Alcance sua meta hoje para mantê-la.</string>
+    <string name="streak_completed_today">Hoje você somou mais um dia!</string>
+    <string name="streak_best">Recorde</string>
+    <string name="notification_action_add">Adicionar %1$s</string>
+    <string name="reminders_title">Lembretes</string>
+    <string name="reminder_summary_off">Desativados</string>
+    <string name="reminder_summary_no_days">Escolha pelo menos um dia</string>
+    <string name="reminder_summary_once">Às %1$s</string>
+    <string name="reminder_summary_interval">A cada %1$s, das %2$s às %3$s</string>
+    <string name="reminder_summary_every_day">todos os dias</string>
+    <string name="reminder_frequency">Frequência</string>
+    <string name="reminder_frequency_once">Uma vez por dia</string>
+    <string name="duration_hours">%1$d h</string>
+    <string name="duration_hours_minutes">%1$d h %2$d min</string>
+    <string name="reminder_time">Horário</string>
+    <string name="reminder_from">Das</string>
+    <string name="reminder_until">Até</string>
+    <string name="reminder_days">Dias</string>
+    <string name="reminder_skip_when_reached">Silenciar ao atingir a meta</string>
+    <string name="reminder_skip_when_reached_desc">Você não receberá mais lembretes nesse dia.</string>
+    <string name="reminder_sound_settings">Som e vibração</string>
+    <string name="settings_analytics">Estatísticas de uso</string>
+    <string name="settings_analytics_desc">Compartilhe dados de uso para nos ajudar a melhorar o app.</string>
+    <plurals name="streak_current">
+        <item quantity="one">%d dia seguido</item>
+        <item quantity="many">%d dias seguidos</item>
+        <item quantity="other">%d dias seguidos</item>
+    </plurals>
+    <plurals name="notification_body_streak">
+        <item quantity="one">Você bebeu %1$s de %2$s. Não perca sua sequência de %3$d dia!</item>
+        <item quantity="many">Você bebeu %1$s de %2$s. Não perca sua sequência de %3$d dias!</item>
+        <item quantity="other">Você bebeu %1$s de %2$s. Não perca sua sequência de %3$d dias!</item>
+    </plurals>
 </resources>
