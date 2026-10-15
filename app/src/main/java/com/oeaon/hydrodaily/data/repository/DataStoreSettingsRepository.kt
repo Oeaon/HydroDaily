@@ -39,6 +39,10 @@ class DataStoreSettingsRepository @Inject constructor(
         .map { prefs -> prefs[LAST_REVIEW_PROMPT]?.let { runCatching { LocalDate.parse(it) }.getOrNull() } }
         .distinctUntilChanged()
 
+    override val isPremium: Flow<Boolean> = dataStore.data
+        .map { it[PREMIUM] ?: false }
+        .distinctUntilChanged()
+
     override suspend fun saveReminderSettings(settings: ReminderSettings) {
         dataStore.edit { prefs ->
             prefs[REMINDERS_ENABLED] = settings.enabled
@@ -60,6 +64,10 @@ class DataStoreSettingsRepository @Inject constructor(
 
     override suspend fun setLastReviewPrompt(date: LocalDate) {
         dataStore.edit { it[LAST_REVIEW_PROMPT] = date.toString() }
+    }
+
+    override suspend fun setPremium(premium: Boolean) {
+        dataStore.edit { it[PREMIUM] = premium }
     }
 
     private fun Preferences.toReminderSettings(): ReminderSettings {
@@ -94,6 +102,7 @@ class DataStoreSettingsRepository @Inject constructor(
         val PERMISSION_ASKED = booleanPreferencesKey("notification_permission_asked")
         val ANALYTICS_ENABLED = booleanPreferencesKey("analytics_enabled")
         val LAST_REVIEW_PROMPT = stringPreferencesKey("last_review_prompt")
+        val PREMIUM = booleanPreferencesKey("premium_no_ads")
         const val SEPARATOR = ","
         const val MINUTES_PER_HOUR = 60
         const val MINUTES_PER_DAY = 24 * 60

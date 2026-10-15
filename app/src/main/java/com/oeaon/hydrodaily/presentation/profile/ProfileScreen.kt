@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import androidx.annotation.StringRes
+import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -58,6 +59,9 @@ import com.oeaon.hydrodaily.R
 import com.oeaon.hydrodaily.domain.model.ActivityLevel
 import com.oeaon.hydrodaily.domain.model.Gender
 import com.oeaon.hydrodaily.presentation.common.formatVolume
+import com.oeaon.hydrodaily.presentation.premium.PremiumCard
+import com.oeaon.hydrodaily.presentation.premium.PremiumUiState
+import com.oeaon.hydrodaily.presentation.premium.PremiumViewModel
 
 @Composable
 fun ProfileRoute(
@@ -65,10 +69,13 @@ fun ProfileRoute(
     privacyOptionsRequired: Boolean,
     onPrivacyOptions: () -> Unit,
     onProfileSaved: () -> Unit,
-    viewModel: ProfileViewModel = hiltViewModel()
+    viewModel: ProfileViewModel = hiltViewModel(),
+    premiumViewModel: PremiumViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val premiumState by premiumViewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
+    val activity = LocalActivity.current
     val currentOnProfileSaved by rememberUpdatedState(onProfileSaved)
     var notificationsBlocked by remember { mutableStateOf(false) }
     var exactAlarmBlocked by remember { mutableStateOf(false) }
@@ -89,6 +96,7 @@ fun ProfileRoute(
 
     ProfileScreen(
         state = state,
+        premiumState = premiumState,
         contentPadding = contentPadding,
         notificationsBlocked = notificationsBlocked,
         exactAlarmBlocked = exactAlarmBlocked,
@@ -109,13 +117,16 @@ fun ProfileRoute(
             onOpenExactAlarmSettings = { context.openExactAlarmSettings() }
         ),
         onAnalyticsToggled = viewModel::onAnalyticsToggled,
-        onPrivacyOptions = onPrivacyOptions
+        onPrivacyOptions = onPrivacyOptions,
+        onBuyPremium = { activity?.let(premiumViewModel::onBuy) },
+        onRestorePremium = premiumViewModel::onRestore
     )
 }
 
 @Composable
 fun ProfileScreen(
     state: ProfileUiState,
+    premiumState: PremiumUiState,
     contentPadding: PaddingValues,
     notificationsBlocked: Boolean,
     exactAlarmBlocked: Boolean,
@@ -126,7 +137,9 @@ fun ProfileScreen(
     onSave: () -> Unit,
     reminderActions: ReminderActions,
     onAnalyticsToggled: (Boolean) -> Unit,
-    onPrivacyOptions: () -> Unit
+    onPrivacyOptions: () -> Unit,
+    onBuyPremium: () -> Unit,
+    onRestorePremium: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
     Column(
@@ -209,6 +222,8 @@ fun ProfileScreen(
                 Text(stringResource(R.string.profile_calculate), style = MaterialTheme.typography.titleMedium)
             }
         }
+
+        PremiumCard(state = premiumState, onBuy = onBuyPremium, onRestore = onRestorePremium)
 
         SectionTitle(R.string.reminders_title) {
             ReminderSettingsCard(

@@ -21,4 +21,6 @@ sealed class AnalyticsEvent(val name: String, val params: Map<String, Any> = emp
     data object ReminderShown : AnalyticsEvent("reminder_shown")
 
     data object ReviewPrompted : AnalyticsEvent("review_prompted")
+
+    data object PremiumPurchased : AnalyticsEvent("premium_purchased")
 }

@@ -81,4 +81,16 @@
     <plurals name="notification_body_streak">
         <item quantity="other">你已喝了 %1$s，目标 %2$s。别让连续 %3$d 天的记录中断！</item>
     </plurals>
+
+    <string name="premium_desc">一次付费即可移除所有广告。无需订阅，永久有效。</string>
+    <string name="premium_active">Premium 已激活：尽情享受无广告的 HydroDaily。感谢你的支持！</string>
+    <string name="premium_buy">%1$s 移除广告</string>
+    <string name="premium_buy_no_price">移除广告</string>
+    <string name="premium_restore">恢复购买</string>
+    <string name="premium_pending">购买等待确认…</string>
+    <string name="premium_error_store">商店暂时不可用，请稍后再试。</string>
+    <string name="premium_error_product">无法加载商品，请稍后再试。</string>
+    <string name="premium_error_failed">无法完成购买。</string>
+    <string name="premium_nothing_to_restore">未找到可恢复的购买。</string>
+    <string name="premium_restored">购买已恢复，再也不会看到广告了！</string>
 </resources>

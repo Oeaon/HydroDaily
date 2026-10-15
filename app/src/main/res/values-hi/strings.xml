@@ -83,4 +83,16 @@
         <item quantity="one">आपने %2$s में से %1$s पी लिया है। अपनी %3$d दिन की स्ट्रीक न टूटने दें!</item>
         <item quantity="other">आपने %2$s में से %1$s पी लिया है। अपनी %3$d दिन की स्ट्रीक न टूटने दें!</item>
     </plurals>
+
+    <string name="premium_desc">एक ही भुगतान से सभी विज्ञापन हटाएँ। कोई सदस्यता नहीं: हमेशा के लिए आपका।</string>
+    <string name="premium_active">Premium सक्रिय है: बिना विज्ञापनों के HydroDaily का आनंद लें। आपके समर्थन के लिए धन्यवाद!</string>
+    <string name="premium_buy">%1$s में विज्ञापन हटाएँ</string>
+    <string name="premium_buy_no_price">विज्ञापन हटाएँ</string>
+    <string name="premium_restore">खरीदारी बहाल करें</string>
+    <string name="premium_pending">खरीदारी की पुष्टि लंबित है…</string>
+    <string name="premium_error_store">स्टोर अभी उपलब्ध नहीं है। कृपया बाद में फिर से कोशिश करें।</string>
+    <string name="premium_error_product">उत्पाद लोड नहीं हो सका। कृपया बाद में फिर से कोशिश करें।</string>
+    <string name="premium_error_failed">खरीदारी पूरी नहीं हो सकी।</string>
+    <string name="premium_nothing_to_restore">बहाल करने के लिए कोई खरीदारी नहीं मिली।</string>
+    <string name="premium_restored">खरीदारी बहाल हो गई। अब कोई विज्ञापन नहीं!</string>
 </resources>

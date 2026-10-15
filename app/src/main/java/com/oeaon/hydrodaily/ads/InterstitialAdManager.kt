@@ -18,7 +18,8 @@ class InterstitialAdManager @Inject constructor(
     private val adUnitIds: AdUnitIds,
     private val consentManager: ConsentManager,
     private val initializer: MobileAdsInitializer,
-    private val tracker: FullscreenAdTracker
+    private val tracker: FullscreenAdTracker,
+    private val adsPolicy: AdsPolicy
 ) {
 
     private var interstitialAd: InterstitialAd? = null
@@ -47,6 +48,10 @@ class InterstitialAdManager @Inject constructor(
 
     fun showIfReady(activity: Activity, onFinished: () -> Unit = {}) {
         val ad = interstitialAd
+        if (!adsPolicy.adsEnabled.value) {
+            onFinished()
+            return
+        }
         if (ad == null || tracker.isShowing || tracker.elapsedSinceLastAdMs() < MIN_INTERVAL_MS) {
             preload()
             onFinished()
@@ -75,7 +80,10 @@ class InterstitialAdManager @Inject constructor(
     }
 
     private fun canLoad(): Boolean =
-        adUnitIds.interstitial.isNotBlank() && consentManager.canRequestAds && initializer.isReady.value
+        adsPolicy.adsEnabled.value &&
+            adUnitIds.interstitial.isNotBlank() &&
+            consentManager.canRequestAds &&
+            initializer.isReady.value
 
     private companion object {
         const val MIN_INTERVAL_MS = 120_000L

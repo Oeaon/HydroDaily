@@ -6,12 +6,15 @@ import com.oeaon.hydrodaily.domain.analytics.AnalyticsTracker
 import com.oeaon.hydrodaily.domain.model.DailyIntake
 import com.oeaon.hydrodaily.domain.model.ReminderSettings
 import com.oeaon.hydrodaily.domain.model.UserProfile
+import com.oeaon.hydrodaily.domain.premium.PremiumBilling
+import com.oeaon.hydrodaily.domain.premium.PurchaseResult
 import com.oeaon.hydrodaily.domain.reminder.ReminderScheduler
 import com.oeaon.hydrodaily.domain.repository.GoalHistoryRepository
 import com.oeaon.hydrodaily.domain.repository.IntakeRepository
 import com.oeaon.hydrodaily.domain.repository.ProfileRepository
 import com.oeaon.hydrodaily.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
@@ -56,6 +59,7 @@ class FakeGoalHistoryRepository(initial: Set<LocalDate> = emptySet()) : GoalHist
 class FakeSettingsRepository(reminders: ReminderSettings = ReminderSettings()) : SettingsRepository {
     val reminderState = MutableStateFlow(reminders)
     val lastReviewState = MutableStateFlow<LocalDate?>(null)
+    val premiumState = MutableStateFlow(false)
     private val permissionAsked = MutableStateFlow(false)
     private val analytics = MutableStateFlow(true)
 
@@ -63,6 +67,7 @@ class FakeSettingsRepository(reminders: ReminderSettings = ReminderSettings()) :
     override val notificationPermissionAsked: Flow<Boolean> = permissionAsked
     override val analyticsEnabled: Flow<Boolean> = analytics
     override val lastReviewPrompt: Flow<LocalDate?> = lastReviewState
+    override val isPremium: Flow<Boolean> = premiumState
 
     override suspend fun saveReminderSettings(settings: ReminderSettings) {
         reminderState.value = settings
@@ -78,6 +83,10 @@ class FakeSettingsRepository(reminders: ReminderSettings = ReminderSettings()) :
 
     override suspend fun setLastReviewPrompt(date: LocalDate) {
         lastReviewState.value = date
+    }
+
+    override suspend fun setPremium(premium: Boolean) {
+        premiumState.value = premium
     }
 }
 
@@ -102,4 +111,10 @@ class FakeReminderScheduler : ReminderScheduler {
     override fun cancel() {
         scheduled = null
     }
+}
+
+class FakePremiumBilling(var owned: Boolean? = false, var price: String? = "3,00 €") : PremiumBilling {
+    override val purchaseResults = MutableSharedFlow<PurchaseResult>()
+    override suspend fun isPremiumOwned(): Boolean? = owned
+    override suspend fun premiumPrice(): String? = price
 }

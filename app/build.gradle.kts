@@ -103,6 +103,7 @@ dependencies {
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.analytics)
     implementation(libs.play.review)
+    implementation(libs.play.billing)
     implementation(libs.play.services.ads)
     implementation(libs.user.messaging.platform)
 

@@ -9,8 +9,10 @@ interface SettingsRepository {
     val notificationPermissionAsked: Flow<Boolean>
     val analyticsEnabled: Flow<Boolean>
     val lastReviewPrompt: Flow<LocalDate?>
+    val isPremium: Flow<Boolean>
     suspend fun saveReminderSettings(settings: ReminderSettings)
     suspend fun setNotificationPermissionAsked()
     suspend fun setAnalyticsEnabled(enabled: Boolean)
     suspend fun setLastReviewPrompt(date: LocalDate)
+    suspend fun setPremium(premium: Boolean)
 }

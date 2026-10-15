@@ -7,4 +7,5 @@
     <string name="unit_kg" translatable="false">kg</string>
     <string name="percent_value" translatable="false">%1$d%%</string>
     <string name="streak_emoji" translatable="false">🔥</string>
+    <string name="premium_title" translatable="false">HydroDaily Premium</string>
 </resources>
