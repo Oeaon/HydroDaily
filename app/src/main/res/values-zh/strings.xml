@@ -82,10 +82,8 @@
         <item quantity="other">你已喝了 %1$s，目标 %2$s。别让连续 %3$d 天的记录中断！</item>
     </plurals>
 
-    <string name="premium_desc">一次付费即可移除所有广告。无需订阅，永久有效。</string>
-    <string name="premium_active">Premium 已激活：尽情享受无广告的 HydroDaily。感谢你的支持！</string>
-    <string name="premium_buy">%1$s 移除广告</string>
-    <string name="premium_buy_no_price">移除广告</string>
+    <string name="premium_desc">畅享无广告的 HydroDaily。可选择一次性永久买断或按月订阅。</string>
+    <string name="premium_active">永久 Premium 已激活：尽情享受无广告的 HydroDaily。感谢你的支持！</string>
     <string name="premium_restore">恢复购买</string>
     <string name="premium_pending">购买等待确认…</string>
     <string name="premium_error_store">商店暂时不可用，请稍后再试。</string>
@@ -93,4 +91,11 @@
     <string name="premium_error_failed">无法完成购买。</string>
     <string name="premium_nothing_to_restore">未找到可恢复的购买。</string>
     <string name="premium_restored">购买已恢复，再也不会看到广告了！</string>
+    <string name="premium_active_monthly">你的无广告订阅已生效。感谢你的支持！</string>
+    <string name="premium_buy_lifetime">%1$s 永久买断</string>
+    <string name="premium_buy_lifetime_no_price">永久移除广告</string>
+    <string name="premium_buy_monthly">每月 %1$s</string>
+    <string name="premium_buy_monthly_no_price">按月订阅</string>
+    <string name="premium_subscription_terms">月度订阅会自动续订。你可以随时在 Google Play 中取消。</string>
+    <string name="premium_manage_subscription">管理或取消订阅</string>
 </resources>

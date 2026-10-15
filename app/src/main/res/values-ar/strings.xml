@@ -92,10 +92,8 @@
         <item quantity="other">شربت %1$s من %2$s. لا تفقد سلسلتك المستمرة منذ %3$d يوم!</item>
     </plurals>
 
-    <string name="premium_desc">أزل جميع الإعلانات بدفعة واحدة. بلا اشتراك: إنه لك إلى الأبد.</string>
-    <string name="premium_active">Premium مُفعّل: استمتع بـ HydroDaily دون إعلانات. شكرًا لدعمك!</string>
-    <string name="premium_buy">إزالة الإعلانات مقابل %1$s</string>
-    <string name="premium_buy_no_price">إزالة الإعلانات</string>
+    <string name="premium_desc">استمتع بـ HydroDaily دون إعلانات. اختر دفعة واحدة مدى الحياة أو اشتراكًا شهريًا.</string>
+    <string name="premium_active">Premium مدى الحياة مُفعّل: استمتع بـ HydroDaily دون إعلانات. شكرًا لدعمك!</string>
     <string name="premium_restore">استعادة الشراء</string>
     <string name="premium_pending">الشراء بانتظار التأكيد…</string>
     <string name="premium_error_store">المتجر غير متاح حاليًا. حاول مرة أخرى لاحقًا.</string>
@@ -103,4 +101,11 @@
     <string name="premium_error_failed">تعذّر إتمام الشراء.</string>
     <string name="premium_nothing_to_restore">لم يتم العثور على مشتريات لاستعادتها.</string>
     <string name="premium_restored">تمت استعادة الشراء. لا مزيد من الإعلانات!</string>
+    <string name="premium_active_monthly">اشتراكك الخالي من الإعلانات نشط. شكرًا لدعمك!</string>
+    <string name="premium_buy_lifetime">مدى الحياة مقابل %1$s</string>
+    <string name="premium_buy_lifetime_no_price">إزالة الإعلانات مدى الحياة</string>
+    <string name="premium_buy_monthly">%1$s شهريًا</string>
+    <string name="premium_buy_monthly_no_price">اشتراك شهري</string>
+    <string name="premium_subscription_terms">يتجدد الاشتراك الشهري تلقائيًا. يمكنك إلغاؤه في أي وقت من Google Play.</string>
+    <string name="premium_manage_subscription">إدارة الاشتراك أو إلغاؤه</string>
 </resources>

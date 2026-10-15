@@ -4,13 +4,23 @@ import kotlinx.coroutines.flow.Flow
 
 interface PremiumBilling {
     val purchaseResults: Flow<PurchaseResult>
-    suspend fun isPremiumOwned(): Boolean?
-    suspend fun premiumPrice(): String?
+    suspend fun ownedPlan(): OwnedPlanQuery
+    suspend fun prices(): Map<PremiumPlan, String>
 }
 
-enum class PurchaseResult {
-    PURCHASED,
-    PENDING,
-    CANCELLED,
-    FAILED
+enum class PremiumPlan {
+    MONTHLY,
+    LIFETIME
+}
+
+sealed interface OwnedPlanQuery {
+    data class Answered(val plan: PremiumPlan?) : OwnedPlanQuery
+    data object StoreUnavailable : OwnedPlanQuery
+}
+
+sealed interface PurchaseResult {
+    data class Purchased(val plan: PremiumPlan) : PurchaseResult
+    data object Pending : PurchaseResult
+    data object Cancelled : PurchaseResult
+    data object Failed : PurchaseResult
 }

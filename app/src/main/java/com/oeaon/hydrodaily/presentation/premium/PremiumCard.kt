@@ -15,6 +15,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -24,12 +26,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.oeaon.hydrodaily.R
+import com.oeaon.hydrodaily.domain.premium.PremiumPlan
 
 @Composable
 fun PremiumCard(
     state: PremiumUiState,
-    onBuy: () -> Unit,
-    onRestore: () -> Unit
+    onBuy: (PremiumPlan) -> Unit,
+    onRestore: () -> Unit,
+    onManageSubscription: () -> Unit
 ) {
     Card(
         colors = CardDefaults.cardColors(
@@ -56,56 +60,95 @@ fun PremiumCard(
                     style = MaterialTheme.typography.titleLarge
                 )
             }
-            Text(
-                text = stringResource(if (state.isPremium) R.string.premium_active else R.string.premium_desc),
-                style = MaterialTheme.typography.bodyMedium
-            )
-            if (!state.isPremium) {
-                Button(
-                    onClick = onBuy,
-                    enabled = !state.isBusy && !state.isPending,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.secondary,
-                        contentColor = MaterialTheme.colorScheme.onSecondary
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(52.dp)
-                ) {
-                    if (state.isBusy) {
-                        CircularProgressIndicator(strokeWidth = 2.dp, modifier = Modifier.size(20.dp))
-                    } else {
-                        Text(
-                            text = state.price?.let { stringResource(R.string.premium_buy, it) }
-                                ?: stringResource(R.string.premium_buy_no_price),
-                            style = MaterialTheme.typography.titleMedium
-                        )
-                    }
-                }
-                TextButton(
-                    onClick = onRestore,
-                    enabled = !state.isBusy,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(stringResource(R.string.premium_restore))
-                }
-            }
-            val status = when {
-                state.isPending -> R.string.premium_pending
-                else -> state.message?.text()
-            }
-            status?.let {
-                Text(
-                    text = stringResource(it),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = if (state.message?.isError == true) {
-                        MaterialTheme.colorScheme.error
-                    } else {
-                        MaterialTheme.colorScheme.onSecondaryContainer
-                    }
+            when (state.activePlan) {
+                PremiumPlan.LIFETIME -> Text(
+                    text = stringResource(R.string.premium_active),
+                    style = MaterialTheme.typography.bodyMedium
                 )
+                PremiumPlan.MONTHLY -> {
+                    Text(
+                        text = stringResource(R.string.premium_active_monthly),
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                    OutlinedButton(onClick = onManageSubscription, modifier = Modifier.fillMaxWidth()) {
+                        Text(stringResource(R.string.premium_manage_subscription))
+                    }
+                }
+                null -> PurchaseOptions(state, onBuy, onRestore)
             }
+            val status = if (state.isPending) R.string.premium_pending else state.message?.text()
+            status?.let { StatusMessage(it, isError = state.message?.isError == true) }
         }
+    }
+}
+
+@Composable
+private fun PurchaseOptions(state: PremiumUiState, onBuy: (PremiumPlan) -> Unit, onRestore: () -> Unit) {
+    val enabled = !state.isBusy && !state.isPending
+    Text(
+        text = stringResource(R.string.premium_desc),
+        style = MaterialTheme.typography.bodyMedium
+    )
+    Button(
+        onClick = { onBuy(PremiumPlan.LIFETIME) },
+        enabled = enabled,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.secondary,
+            contentColor = MaterialTheme.colorScheme.onSecondary
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(52.dp)
+    ) {
+        if (state.isBusy) {
+            CircularProgressIndicator(strokeWidth = 2.dp, modifier = Modifier.size(20.dp))
+        } else {
+            Text(
+                text = state.prices[PremiumPlan.LIFETIME]?.let { stringResource(R.string.premium_buy_lifetime, it) }
+                    ?: stringResource(R.string.premium_buy_lifetime_no_price),
+                style = MaterialTheme.typography.titleMedium
+            )
+        }
+    }
+    OutlinedButton(
+        onClick = { onBuy(PremiumPlan.MONTHLY) },
+        enabled = enabled,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(52.dp)
+    ) {
+        Text(
+            text = state.prices[PremiumPlan.MONTHLY]?.let { stringResource(R.string.premium_buy_monthly, it) }
+                ?: stringResource(R.string.premium_buy_monthly_no_price),
+            style = MaterialTheme.typography.titleMedium
+        )
+    }
+    Text(
+        text = stringResource(R.string.premium_subscription_terms),
+        style = MaterialTheme.typography.bodySmall
+    )
+    TextButton(
+        onClick = onRestore,
+        enabled = !state.isBusy,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(stringResource(R.string.premium_restore))
+    }
+}
+
+@Composable
+private fun StatusMessage(@StringRes text: Int, isError: Boolean) {
+    Surface(
+        color = if (isError) MaterialTheme.colorScheme.errorContainer else MaterialTheme.colorScheme.surface,
+        contentColor = if (isError) MaterialTheme.colorScheme.onErrorContainer else MaterialTheme.colorScheme.onSurface,
+        shape = MaterialTheme.shapes.small,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = stringResource(text),
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp)
+        )
     }
 }
 

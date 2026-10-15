@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.oeaon.hydrodaily.domain.model.ReminderFrequency
 import com.oeaon.hydrodaily.domain.model.ReminderSettings
+import com.oeaon.hydrodaily.domain.premium.PremiumPlan
 import com.oeaon.hydrodaily.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -39,8 +40,8 @@ class DataStoreSettingsRepository @Inject constructor(
         .map { prefs -> prefs[LAST_REVIEW_PROMPT]?.let { runCatching { LocalDate.parse(it) }.getOrNull() } }
         .distinctUntilChanged()
 
-    override val isPremium: Flow<Boolean> = dataStore.data
-        .map { it[PREMIUM] ?: false }
+    override val premiumPlan: Flow<PremiumPlan?> = dataStore.data
+        .map { prefs -> prefs[PREMIUM_PLAN]?.let { name -> PremiumPlan.entries.firstOrNull { it.name == name } } }
         .distinctUntilChanged()
 
     override suspend fun saveReminderSettings(settings: ReminderSettings) {
@@ -66,8 +67,10 @@ class DataStoreSettingsRepository @Inject constructor(
         dataStore.edit { it[LAST_REVIEW_PROMPT] = date.toString() }
     }
 
-    override suspend fun setPremium(premium: Boolean) {
-        dataStore.edit { it[PREMIUM] = premium }
+    override suspend fun setPremiumPlan(plan: PremiumPlan?) {
+        dataStore.edit { prefs ->
+            if (plan == null) prefs.remove(PREMIUM_PLAN) else prefs[PREMIUM_PLAN] = plan.name
+        }
     }
 
     private fun Preferences.toReminderSettings(): ReminderSettings {
@@ -102,7 +105,7 @@ class DataStoreSettingsRepository @Inject constructor(
         val PERMISSION_ASKED = booleanPreferencesKey("notification_permission_asked")
         val ANALYTICS_ENABLED = booleanPreferencesKey("analytics_enabled")
         val LAST_REVIEW_PROMPT = stringPreferencesKey("last_review_prompt")
-        val PREMIUM = booleanPreferencesKey("premium_no_ads")
+        val PREMIUM_PLAN = stringPreferencesKey("premium_plan")
         const val SEPARATOR = ","
         const val MINUTES_PER_HOUR = 60
         const val MINUTES_PER_DAY = 24 * 60

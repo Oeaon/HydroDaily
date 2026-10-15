@@ -1,5 +1,7 @@
 package com.oeaon.hydrodaily.domain.analytics
 
+import com.oeaon.hydrodaily.domain.premium.PremiumPlan
+
 sealed class AnalyticsEvent(val name: String, val params: Map<String, Any> = emptyMap()) {
 
     class WaterAdded(amountMl: Int, fromNotification: Boolean) : AnalyticsEvent(
@@ -22,5 +24,6 @@ sealed class AnalyticsEvent(val name: String, val params: Map<String, Any> = emp
 
     data object ReviewPrompted : AnalyticsEvent("review_prompted")
 
-    data object PremiumPurchased : AnalyticsEvent("premium_purchased")
+    class PremiumPurchased(plan: PremiumPlan) :
+        AnalyticsEvent("premium_purchased", mapOf("plan" to plan.name.lowercase()))
 }

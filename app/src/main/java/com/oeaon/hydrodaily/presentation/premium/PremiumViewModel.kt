@@ -4,7 +4,9 @@ import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oeaon.hydrodaily.billing.PurchaseFlowLauncher
+import com.oeaon.hydrodaily.domain.premium.OwnedPlanQuery
 import com.oeaon.hydrodaily.domain.premium.PremiumBilling
+import com.oeaon.hydrodaily.domain.premium.PremiumPlan
 import com.oeaon.hydrodaily.domain.premium.PurchaseResult
 import com.oeaon.hydrodaily.domain.repository.SettingsRepository
 import com.oeaon.hydrodaily.domain.usecase.SyncPremiumUseCase
@@ -30,23 +32,23 @@ class PremiumViewModel @Inject constructor(
     val uiState: StateFlow<PremiumUiState> = _uiState.asStateFlow()
 
     init {
-        settingsRepository.isPremium
-            .onEach { premium -> _uiState.update { it.copy(isPremium = premium) } }
+        settingsRepository.premiumPlan
+            .onEach { plan -> _uiState.update { it.copy(activePlan = plan) } }
             .launchIn(viewModelScope)
         billing.purchaseResults
             .onEach(::onPurchaseResult)
             .launchIn(viewModelScope)
         viewModelScope.launch {
-            val price = billing.premiumPrice()
-            _uiState.update { it.copy(price = price) }
+            val prices = billing.prices()
+            _uiState.update { it.copy(prices = prices) }
         }
     }
 
-    fun onBuy(activity: Activity) {
-        if (_uiState.value.isBusy || _uiState.value.isPremium) return
+    fun onBuy(activity: Activity, plan: PremiumPlan) {
+        if (_uiState.value.isBusy || _uiState.value.activePlan != null) return
         _uiState.update { it.copy(isBusy = true, message = null) }
         viewModelScope.launch {
-            val message = when (purchaseFlowLauncher.launchPremiumPurchase(activity)) {
+            val message = when (purchaseFlowLauncher.launchPurchase(activity, plan)) {
                 PurchaseFlowLauncher.LaunchResult.STARTED -> return@launch
                 PurchaseFlowLauncher.LaunchResult.STORE_UNAVAILABLE -> PremiumMessage.STORE_UNAVAILABLE
                 PurchaseFlowLauncher.LaunchResult.PRODUCT_NOT_FOUND -> PremiumMessage.PRODUCT_NOT_FOUND
@@ -59,10 +61,10 @@ class PremiumViewModel @Inject constructor(
         if (_uiState.value.isBusy) return
         _uiState.update { it.copy(isBusy = true, message = null) }
         viewModelScope.launch {
-            val message = when (syncPremium()) {
-                true -> PremiumMessage.RESTORED
-                false -> PremiumMessage.NOTHING_TO_RESTORE
-                null -> PremiumMessage.STORE_UNAVAILABLE
+            val message = when (val query = syncPremium()) {
+                OwnedPlanQuery.StoreUnavailable -> PremiumMessage.STORE_UNAVAILABLE
+                is OwnedPlanQuery.Answered ->
+                    if (query.plan != null) PremiumMessage.RESTORED else PremiumMessage.NOTHING_TO_RESTORE
             }
             _uiState.update { it.copy(isBusy = false, message = message) }
         }
@@ -72,20 +74,22 @@ class PremiumViewModel @Inject constructor(
         _uiState.update {
             it.copy(
                 isBusy = false,
-                isPending = result == PurchaseResult.PENDING,
-                message = if (result == PurchaseResult.FAILED) PremiumMessage.PURCHASE_FAILED else null
+                isPending = result == PurchaseResult.Pending,
+                message = if (result == PurchaseResult.Failed) PremiumMessage.PURCHASE_FAILED else null
             )
         }
     }
 }
 
 data class PremiumUiState(
-    val isPremium: Boolean = false,
-    val price: String? = null,
+    val activePlan: PremiumPlan? = null,
+    val prices: Map<PremiumPlan, String> = emptyMap(),
     val isBusy: Boolean = false,
     val isPending: Boolean = false,
     val message: PremiumMessage? = null
-)
+) {
+    val isPremium: Boolean get() = activePlan != null
+}
 
 enum class PremiumMessage {
     STORE_UNAVAILABLE,

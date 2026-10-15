@@ -86,10 +86,8 @@
         <item quantity="other">Você bebeu %1$s de %2$s. Não perca sua sequência de %3$d dias!</item>
     </plurals>
 
-    <string name="premium_desc">Remova todos os anúncios com um único pagamento. Sem assinatura: é seu para sempre.</string>
-    <string name="premium_active">Premium ativo: aproveite o HydroDaily sem anúncios. Obrigado pelo seu apoio!</string>
-    <string name="premium_buy">Remover anúncios por %1$s</string>
-    <string name="premium_buy_no_price">Remover anúncios</string>
+    <string name="premium_desc">Aproveite o HydroDaily sem anúncios. Escolha um pagamento único vitalício ou uma assinatura mensal.</string>
+    <string name="premium_active">Premium vitalício ativo: aproveite o HydroDaily sem anúncios. Obrigado pelo seu apoio!</string>
     <string name="premium_restore">Restaurar compra</string>
     <string name="premium_pending">Compra aguardando confirmação…</string>
     <string name="premium_error_store">A loja não está disponível agora. Tente novamente mais tarde.</string>
@@ -97,4 +95,11 @@
     <string name="premium_error_failed">Não foi possível concluir a compra.</string>
     <string name="premium_nothing_to_restore">Nenhuma compra encontrada para restaurar.</string>
     <string name="premium_restored">Compra restaurada. Chega de anúncios!</string>
+    <string name="premium_active_monthly">Sua assinatura sem anúncios está ativa. Obrigado pelo seu apoio!</string>
+    <string name="premium_buy_lifetime">Para sempre por %1$s</string>
+    <string name="premium_buy_lifetime_no_price">Remover anúncios para sempre</string>
+    <string name="premium_buy_monthly">%1$s por mês</string>
+    <string name="premium_buy_monthly_no_price">Assinatura mensal</string>
+    <string name="premium_subscription_terms">A assinatura mensal é renovada automaticamente. Você pode cancelá-la quando quiser no Google Play.</string>
+    <string name="premium_manage_subscription">Gerenciar ou cancelar assinatura</string>
 </resources>

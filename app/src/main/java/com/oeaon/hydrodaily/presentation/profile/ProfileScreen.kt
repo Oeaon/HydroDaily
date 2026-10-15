@@ -52,12 +52,15 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.oeaon.hydrodaily.R
+import com.oeaon.hydrodaily.billing.PlayPremiumBilling
 import com.oeaon.hydrodaily.domain.model.ActivityLevel
 import com.oeaon.hydrodaily.domain.model.Gender
+import com.oeaon.hydrodaily.domain.premium.PremiumPlan
 import com.oeaon.hydrodaily.presentation.common.formatVolume
 import com.oeaon.hydrodaily.presentation.premium.PremiumCard
 import com.oeaon.hydrodaily.presentation.premium.PremiumUiState
@@ -118,8 +121,9 @@ fun ProfileRoute(
         ),
         onAnalyticsToggled = viewModel::onAnalyticsToggled,
         onPrivacyOptions = onPrivacyOptions,
-        onBuyPremium = { activity?.let(premiumViewModel::onBuy) },
-        onRestorePremium = premiumViewModel::onRestore
+        onBuyPremium = { plan -> activity?.let { premiumViewModel.onBuy(it, plan) } },
+        onRestorePremium = premiumViewModel::onRestore,
+        onManageSubscription = { context.openSubscriptionSettings() }
     )
 }
 
@@ -138,8 +142,9 @@ fun ProfileScreen(
     reminderActions: ReminderActions,
     onAnalyticsToggled: (Boolean) -> Unit,
     onPrivacyOptions: () -> Unit,
-    onBuyPremium: () -> Unit,
-    onRestorePremium: () -> Unit
+    onBuyPremium: (PremiumPlan) -> Unit,
+    onRestorePremium: () -> Unit,
+    onManageSubscription: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
     Column(
@@ -223,7 +228,12 @@ fun ProfileScreen(
             }
         }
 
-        PremiumCard(state = premiumState, onBuy = onBuyPremium, onRestore = onRestorePremium)
+        PremiumCard(
+            state = premiumState,
+            onBuy = onBuyPremium,
+            onRestore = onRestorePremium,
+            onManageSubscription = onManageSubscription
+        )
 
         SectionTitle(R.string.reminders_title) {
             ReminderSettingsCard(
@@ -424,6 +434,12 @@ private fun Context.openReminderChannelSettings() {
         .putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
         .putExtra(Settings.EXTRA_CHANNEL_ID, getString(R.string.reminder_channel_id))
     startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+}
+
+private fun Context.openSubscriptionSettings() {
+    val uri = "https://play.google.com/store/account/subscriptions?sku=${PlayPremiumBilling.MONTHLY_PRODUCT_ID}&package=$packageName"
+        .toUri()
+    runCatching { startActivity(Intent(Intent.ACTION_VIEW, uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
 }
 
 private fun Context.canScheduleExactAlarms(): Boolean =
