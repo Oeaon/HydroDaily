@@ -2,6 +2,7 @@ package com.oeaon.hydrodaily.ads
 
 import android.app.Activity
 import android.content.Context
+import android.os.SystemClock
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
@@ -18,14 +19,16 @@ class InterstitialAdManager @Inject constructor(
     private val adUnitIds: AdUnitIds,
     private val consentManager: ConsentManager,
     private val initializer: MobileAdsInitializer,
-    private val tracker: FullscreenAdTracker
+    private val tracker: FullscreenAdTracker,
+    private val adsPolicy: AdsPolicy
 ) {
 
     private var interstitialAd: InterstitialAd? = null
+    private var loadedAt = 0L
     private var isLoading = false
 
     fun preload() {
-        if (!canLoad() || isLoading || interstitialAd != null) return
+        if (!canLoad() || isLoading || isAdAvailable()) return
         isLoading = true
         InterstitialAd.load(
             context,
@@ -34,6 +37,7 @@ class InterstitialAdManager @Inject constructor(
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(ad: InterstitialAd) {
                     interstitialAd = ad
+                    loadedAt = SystemClock.elapsedRealtime()
                     isLoading = false
                 }
 
@@ -46,7 +50,11 @@ class InterstitialAdManager @Inject constructor(
     }
 
     fun showIfReady(activity: Activity, onFinished: () -> Unit = {}) {
-        val ad = interstitialAd
+        val ad = interstitialAd?.takeIf { isAdAvailable() }
+        if (!adsPolicy.adsEnabled.value) {
+            onFinished()
+            return
+        }
         if (ad == null || tracker.isShowing || tracker.elapsedSinceLastAdMs() < MIN_INTERVAL_MS) {
             preload()
             onFinished()
@@ -75,9 +83,16 @@ class InterstitialAdManager @Inject constructor(
     }
 
     private fun canLoad(): Boolean =
-        adUnitIds.interstitial.isNotBlank() && consentManager.canRequestAds && initializer.isReady.value
+        adsPolicy.adsEnabled.value &&
+            adUnitIds.interstitial.isNotBlank() &&
+            consentManager.canRequestAds &&
+            initializer.isReady.value
+
+    private fun isAdAvailable(): Boolean =
+        interstitialAd != null && SystemClock.elapsedRealtime() - loadedAt < AD_EXPIRATION_MS
 
     private companion object {
+        const val AD_EXPIRATION_MS = 60 * 60 * 1000L
         const val MIN_INTERVAL_MS = 120_000L
     }
 }

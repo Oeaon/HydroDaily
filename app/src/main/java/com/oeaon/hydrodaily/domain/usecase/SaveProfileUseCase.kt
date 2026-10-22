@@ -1,5 +1,7 @@
 package com.oeaon.hydrodaily.domain.usecase
 
+import com.oeaon.hydrodaily.domain.analytics.AnalyticsEvent
+import com.oeaon.hydrodaily.domain.analytics.AnalyticsTracker
 import com.oeaon.hydrodaily.domain.model.ActivityLevel
 import com.oeaon.hydrodaily.domain.model.Gender
 import com.oeaon.hydrodaily.domain.model.UserProfile
@@ -8,7 +10,9 @@ import javax.inject.Inject
 
 class SaveProfileUseCase @Inject constructor(
     private val repository: ProfileRepository,
-    private val calculateDailyGoal: CalculateDailyGoalUseCase
+    private val calculateDailyGoal: CalculateDailyGoalUseCase,
+    private val updateGoalHistory: UpdateGoalHistoryUseCase,
+    private val analytics: AnalyticsTracker
 ) {
 
     suspend operator fun invoke(
@@ -23,6 +27,8 @@ class SaveProfileUseCase @Inject constructor(
         val goal = calculateDailyGoal(weightKg, gender, activityLevel)
         val profile = UserProfile(weightKg, gender, activityLevel, goal)
         repository.save(profile)
+        updateGoalHistory()
+        analytics.track(AnalyticsEvent.ProfileSaved(goal))
         return Result.Saved(profile)
     }
 

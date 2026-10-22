@@ -12,6 +12,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.oeaon.hydrodaily.R
 import com.oeaon.hydrodaily.presentation.MainActivity
+import com.oeaon.hydrodaily.presentation.common.formatVolume
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -38,10 +39,10 @@ class ReminderNotifier @Inject constructor(
     fun canNotify(): Boolean = NotificationManagerCompat.from(context).areNotificationsEnabled()
 
     @SuppressLint("MissingPermission")
-    fun show(title: String, body: String, notificationId: Int = DAILY_REMINDER_ID) {
+    fun show(title: String, body: String, notificationId: Int = DAILY_REMINDER_ID, quickAddMl: Int? = null) {
         if (!canNotify()) return
         createChannel()
-        val notification = NotificationCompat.Builder(context, channelId)
+        val builder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(R.drawable.ic_notification)
             .setColor(ContextCompat.getColor(context, R.color.brand_primary))
             .setContentTitle(title)
@@ -51,8 +52,30 @@ class ReminderNotifier @Inject constructor(
             .setCategory(NotificationCompat.CATEGORY_REMINDER)
             .setAutoCancel(true)
             .setContentIntent(openAppIntent())
-            .build()
-        NotificationManagerCompat.from(context).notify(notificationId, notification)
+        quickAddMl?.let { amount ->
+            builder.addAction(
+                R.drawable.ic_water_drop,
+                context.getString(R.string.notification_action_add, context.formatVolume(amount)),
+                quickAddIntent(amount)
+            )
+        }
+        NotificationManagerCompat.from(context).notify(notificationId, builder.build())
+    }
+
+    fun dismiss(notificationId: Int = DAILY_REMINDER_ID) {
+        NotificationManagerCompat.from(context).cancel(notificationId)
+    }
+
+    private fun quickAddIntent(amountMl: Int): PendingIntent {
+        val intent = Intent(context, ReminderReceiver::class.java)
+            .setAction(ReminderReceiver.ACTION_QUICK_ADD)
+            .putExtra(ReminderReceiver.EXTRA_AMOUNT_ML, amountMl)
+        return PendingIntent.getBroadcast(
+            context,
+            QUICK_ADD_REQUEST_CODE,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
     }
 
     private fun openAppIntent(): PendingIntent {
@@ -70,5 +93,6 @@ class ReminderNotifier @Inject constructor(
     companion object {
         const val DAILY_REMINDER_ID = 1001
         const val PUSH_MESSAGE_ID = 1002
+        private const val QUICK_ADD_REQUEST_CODE = 13
     }
 }

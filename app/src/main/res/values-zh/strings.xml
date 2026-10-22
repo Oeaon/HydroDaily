@@ -37,17 +37,66 @@
     <string name="profile_goal_hint">此计算仅供参考。如有特殊健康需求，请咨询专业医疗人员。</string>
 
     <string name="settings_title">设置</string>
-    <string name="settings_reminders">每日提醒</string>
-    <string name="settings_reminders_desc">我们会在每天 12:00 提醒你</string>
+    <string name="settings_reminders">接收提醒</string>
     <string name="settings_notifications_blocked">此应用的通知已关闭。</string>
     <string name="settings_enable">开启</string>
     <string name="settings_privacy">隐私选项</string>
+    <string name="settings_privacy_policy">隐私政策</string>
 
     <string name="notification_title">该喝水啦！💧</string>
     <string name="notification_body_progress">你已喝了 %1$s，目标 %2$s。现在喝一杯，继续加油。</string>
     <string name="notification_body_goal_reached">你已完成今天的目标！继续保持。</string>
     <string name="notification_body_no_profile">计算你的每日目标，开始关注你的水分补充。</string>
-    <string name="reminder_channel_name">每日提醒</string>
-    <string name="reminder_channel_description">每天中午提醒你喝水。</string>
-    <string name="settings_exact_alarm">允许精确闹钟，以便在 12:00 准时收到提醒。</string>
+    <string name="reminder_channel_name">提醒</string>
+    <string name="reminder_channel_description">提醒你喝水的通知。</string>
+    <string name="settings_exact_alarm">允许精确闹钟，以便在设定的时间准时收到提醒。</string>
+
+    <string name="streak_none">还没有连续记录</string>
+    <string name="streak_start_hint">今天达成目标即可开始连续记录。</string>
+    <string name="streak_keep_hint">今天达成目标即可保持连续记录。</string>
+    <string name="streak_completed_today">今天又多坚持了一天！</string>
+    <string name="streak_best">最佳</string>
+    <string name="notification_action_add">添加 %1$s</string>
+    <string name="reminders_title">提醒</string>
+    <string name="reminder_summary_off">已关闭</string>
+    <string name="reminder_summary_no_days">请至少选择一天</string>
+    <string name="reminder_summary_once">%1$s</string>
+    <string name="reminder_summary_interval">每 %1$s，%2$s 至 %3$s</string>
+    <string name="reminder_summary_every_day">每天</string>
+    <string name="reminder_frequency">频率</string>
+    <string name="reminder_frequency_once">每天一次</string>
+    <string name="duration_hours">%1$d 小时</string>
+    <string name="duration_hours_minutes">%1$d 小时 %2$d 分钟</string>
+    <string name="reminder_time">时间</string>
+    <string name="reminder_from">开始</string>
+    <string name="reminder_until">结束</string>
+    <string name="reminder_days">日期</string>
+    <string name="reminder_skip_when_reached">达成目标后静音</string>
+    <string name="reminder_skip_when_reached_desc">当天将不再收到提醒。</string>
+    <string name="reminder_sound_settings">声音和振动</string>
+    <string name="settings_analytics">使用情况统计</string>
+    <string name="settings_analytics_desc">分享使用数据，帮助我们改进应用。</string>
+    <plurals name="streak_current">
+        <item quantity="other">连续 %d 天</item>
+    </plurals>
+    <plurals name="notification_body_streak">
+        <item quantity="other">你已喝了 %1$s，目标 %2$s。别让连续 %3$d 天的记录中断！</item>
+    </plurals>
+
+    <string name="premium_desc">畅享无广告的 HydroDaily。可选择一次性永久买断或按月订阅。</string>
+    <string name="premium_active">永久 Premium 已激活：尽情享受无广告的 HydroDaily。感谢你的支持！</string>
+    <string name="premium_restore">恢复购买</string>
+    <string name="premium_pending">购买等待确认…</string>
+    <string name="premium_error_store">商店暂时不可用，请稍后再试。</string>
+    <string name="premium_error_product">无法加载商品，请稍后再试。</string>
+    <string name="premium_error_failed">无法完成购买。</string>
+    <string name="premium_nothing_to_restore">未找到可恢复的购买。</string>
+    <string name="premium_restored">购买已恢复，再也不会看到广告了！</string>
+    <string name="premium_active_monthly">你的无广告订阅已生效。感谢你的支持！</string>
+    <string name="premium_buy_lifetime">%1$s 永久买断</string>
+    <string name="premium_buy_lifetime_no_price">永久移除广告</string>
+    <string name="premium_buy_monthly">每月 %1$s</string>
+    <string name="premium_buy_monthly_no_price">按月订阅</string>
+    <string name="premium_subscription_terms">月度订阅会自动续订。你可以随时在 Google Play 中取消。</string>
+    <string name="premium_manage_subscription">管理或取消订阅</string>
 </resources>

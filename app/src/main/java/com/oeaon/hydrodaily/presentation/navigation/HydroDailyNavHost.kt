@@ -31,6 +31,7 @@ fun HydroDailyNavHost(
     privacyOptionsRequired: Boolean,
     onPrivacyOptions: () -> Unit,
     onProfileSaved: (navigateToToday: () -> Unit) -> Unit,
+    onRequestReview: () -> Unit,
     navController: NavHostController = rememberNavController()
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -64,7 +65,8 @@ fun HydroDailyNavHost(
             composable(Destination.Today.route) {
                 TodayRoute(
                     contentPadding = innerPadding,
-                    onSetUpProfile = { navController.navigateToTab(Destination.Profile) }
+                    onSetUpProfile = { navController.navigateToTab(Destination.Profile) },
+                    onRequestReview = onRequestReview
                 )
             }
             composable(Destination.Profile.route) {

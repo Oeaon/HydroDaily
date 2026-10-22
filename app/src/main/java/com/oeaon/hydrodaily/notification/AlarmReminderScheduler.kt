@@ -5,24 +5,21 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import com.oeaon.hydrodaily.domain.TimeProvider
-import com.oeaon.hydrodaily.domain.reminder.NextReminderCalculator
 import com.oeaon.hydrodaily.domain.reminder.ReminderScheduler
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.time.ZonedDateTime
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class AlarmReminderScheduler @Inject constructor(
-    @ApplicationContext private val context: Context,
-    private val timeProvider: TimeProvider,
-    private val calculator: NextReminderCalculator
+    @ApplicationContext private val context: Context
 ) : ReminderScheduler {
 
     private val alarmManager: AlarmManager = context.getSystemService(AlarmManager::class.java)
 
-    override fun scheduleNext() {
-        val triggerAtMillis = calculator.nextTrigger(timeProvider.now()).toInstant().toEpochMilli()
+    override fun scheduleAt(trigger: ZonedDateTime) {
+        val triggerAtMillis = trigger.toInstant().toEpochMilli()
         val operation = reminderIntent()
         alarmManager.cancel(operation)
 

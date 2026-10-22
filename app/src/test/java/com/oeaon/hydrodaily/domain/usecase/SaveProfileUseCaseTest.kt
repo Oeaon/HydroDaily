@@ -1,11 +1,12 @@
 package com.oeaon.hydrodaily.domain.usecase
 
+import com.oeaon.hydrodaily.domain.fakes.FakeAnalyticsTracker
+import com.oeaon.hydrodaily.domain.fakes.FakeGoalHistoryRepository
+import com.oeaon.hydrodaily.domain.fakes.FakeIntakeRepository
+import com.oeaon.hydrodaily.domain.fakes.FakeProfileRepository
+import com.oeaon.hydrodaily.domain.fakes.FakeTimeProvider
 import com.oeaon.hydrodaily.domain.model.ActivityLevel
 import com.oeaon.hydrodaily.domain.model.Gender
-import com.oeaon.hydrodaily.domain.model.UserProfile
-import com.oeaon.hydrodaily.domain.repository.ProfileRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -15,7 +16,13 @@ import org.junit.Test
 class SaveProfileUseCaseTest {
 
     private val repository = FakeProfileRepository()
-    private val saveProfile = SaveProfileUseCase(repository, CalculateDailyGoalUseCase())
+    private val analytics = FakeAnalyticsTracker()
+    private val saveProfile = SaveProfileUseCase(
+        repository,
+        CalculateDailyGoalUseCase(),
+        UpdateGoalHistoryUseCase(repository, FakeIntakeRepository(), FakeGoalHistoryRepository(), FakeTimeProvider()),
+        analytics
+    )
 
     @Test
     fun `valid input saves profile with calculated goal`() = runTest {
@@ -23,6 +30,7 @@ class SaveProfileUseCaseTest {
 
         assertTrue(result is SaveProfileUseCase.Result.Saved)
         assertEquals(3450, repository.state.value?.dailyGoalMl)
+        assertEquals(listOf("profile_saved"), analytics.events.map { it.name })
     }
 
     @Test
@@ -36,13 +44,5 @@ class SaveProfileUseCaseTest {
     fun `missing selections are rejected`() = runTest {
         assertEquals(SaveProfileUseCase.Result.MissingGender, saveProfile(70.0, null, ActivityLevel.LOW))
         assertEquals(SaveProfileUseCase.Result.MissingActivityLevel, saveProfile(70.0, Gender.FEMALE, null))
-    }
-
-    private class FakeProfileRepository : ProfileRepository {
-        val state = MutableStateFlow<UserProfile?>(null)
-        override val profile: Flow<UserProfile?> = state
-        override suspend fun save(profile: UserProfile) {
-            state.value = profile
-        }
     }
 }

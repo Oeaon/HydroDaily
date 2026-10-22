@@ -16,6 +16,9 @@ val Aqua90 = Color(0xFFA6EEFF)
 
 val Mint40 = Color(0xFF16A37F)
 val Mint80 = Color(0xFF6FDBB7)
+val Mint90 = Color(0xFFC9F4E4)
+val Mint20 = Color(0xFF0B3D30)
+val Mint10 = Color(0xFF00241B)
 
 val Mist95 = Color(0xFFF2F6FD)
 val Mist99 = Color(0xFFFAFCFF)

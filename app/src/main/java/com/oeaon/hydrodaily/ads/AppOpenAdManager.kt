@@ -21,7 +21,8 @@ class AppOpenAdManager @Inject constructor(
     private val adUnitIds: AdUnitIds,
     private val consentManager: ConsentManager,
     private val initializer: MobileAdsInitializer,
-    private val tracker: FullscreenAdTracker
+    private val tracker: FullscreenAdTracker,
+    private val adsPolicy: AdsPolicy
 ) : DefaultLifecycleObserver, Application.ActivityLifecycleCallbacks {
 
     private var appOpenAd: AppOpenAd? = null
@@ -61,7 +62,7 @@ class AppOpenAdManager @Inject constructor(
     }
 
     private fun showIfEligible(activity: Activity) {
-        if (tracker.isShowing || !isCooldownOver()) return
+        if (!adsPolicy.adsEnabled.value || tracker.isShowing || !isCooldownOver()) return
         val ad = appOpenAd?.takeIf { isAdAvailable() } ?: return preload()
         ad.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdShowedFullScreenContent() {
@@ -85,7 +86,10 @@ class AppOpenAdManager @Inject constructor(
     }
 
     private fun canLoad(): Boolean =
-        adUnitIds.appOpen.isNotBlank() && consentManager.canRequestAds && initializer.isReady.value
+        adsPolicy.adsEnabled.value &&
+            adUnitIds.appOpen.isNotBlank() &&
+            consentManager.canRequestAds &&
+            initializer.isReady.value
 
     private fun isAdAvailable(): Boolean =
         appOpenAd != null && SystemClock.elapsedRealtime() - loadedAt < AD_EXPIRATION_MS

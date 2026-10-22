@@ -7,12 +7,12 @@ import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import androidx.annotation.StringRes
+import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -33,7 +33,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -53,13 +52,19 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.oeaon.hydrodaily.R
+import com.oeaon.hydrodaily.billing.PlayPremiumBilling
 import com.oeaon.hydrodaily.domain.model.ActivityLevel
 import com.oeaon.hydrodaily.domain.model.Gender
+import com.oeaon.hydrodaily.domain.premium.PremiumPlan
 import com.oeaon.hydrodaily.presentation.common.formatVolume
+import com.oeaon.hydrodaily.presentation.premium.PremiumCard
+import com.oeaon.hydrodaily.presentation.premium.PremiumUiState
+import com.oeaon.hydrodaily.presentation.premium.PremiumViewModel
 
 @Composable
 fun ProfileRoute(
@@ -67,10 +72,13 @@ fun ProfileRoute(
     privacyOptionsRequired: Boolean,
     onPrivacyOptions: () -> Unit,
     onProfileSaved: () -> Unit,
-    viewModel: ProfileViewModel = hiltViewModel()
+    viewModel: ProfileViewModel = hiltViewModel(),
+    premiumViewModel: PremiumViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val premiumState by premiumViewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
+    val activity = LocalActivity.current
     val currentOnProfileSaved by rememberUpdatedState(onProfileSaved)
     var notificationsBlocked by remember { mutableStateOf(false) }
     var exactAlarmBlocked by remember { mutableStateOf(false) }
@@ -91,6 +99,7 @@ fun ProfileRoute(
 
     ProfileScreen(
         state = state,
+        premiumState = premiumState,
         contentPadding = contentPadding,
         notificationsBlocked = notificationsBlocked,
         exactAlarmBlocked = exactAlarmBlocked,
@@ -99,16 +108,29 @@ fun ProfileRoute(
         onGenderSelected = viewModel::onGenderSelected,
         onActivitySelected = viewModel::onActivityLevelSelected,
         onSave = viewModel::onSave,
-        onRemindersToggled = viewModel::onRemindersToggled,
-        onOpenNotificationSettings = { context.openNotificationSettings() },
-        onOpenExactAlarmSettings = { context.openExactAlarmSettings() },
-        onPrivacyOptions = onPrivacyOptions
+        reminderActions = ReminderActions(
+            onEnabledChange = viewModel::onRemindersToggled,
+            onStartTimeChange = viewModel::onReminderStartTimeChange,
+            onEndTimeChange = viewModel::onReminderEndTimeChange,
+            onFrequencyChange = viewModel::onReminderFrequencyChange,
+            onDayToggle = viewModel::onReminderDayToggled,
+            onSkipWhenGoalReachedChange = viewModel::onSkipWhenGoalReachedToggled,
+            onOpenSoundSettings = { context.openReminderChannelSettings() },
+            onOpenNotificationSettings = { context.openNotificationSettings() },
+            onOpenExactAlarmSettings = { context.openExactAlarmSettings() }
+        ),
+        onAnalyticsToggled = viewModel::onAnalyticsToggled,
+        onPrivacyOptions = onPrivacyOptions,
+        onBuyPremium = { plan -> activity?.let { premiumViewModel.onBuy(it, plan) } },
+        onRestorePremium = premiumViewModel::onRestore,
+        onManageSubscription = { context.openSubscriptionSettings() }
     )
 }
 
 @Composable
 fun ProfileScreen(
     state: ProfileUiState,
+    premiumState: PremiumUiState,
     contentPadding: PaddingValues,
     notificationsBlocked: Boolean,
     exactAlarmBlocked: Boolean,
@@ -117,10 +139,12 @@ fun ProfileScreen(
     onGenderSelected: (Gender) -> Unit,
     onActivitySelected: (ActivityLevel) -> Unit,
     onSave: () -> Unit,
-    onRemindersToggled: (Boolean) -> Unit,
-    onOpenNotificationSettings: () -> Unit,
-    onOpenExactAlarmSettings: () -> Unit,
-    onPrivacyOptions: () -> Unit
+    reminderActions: ReminderActions,
+    onAnalyticsToggled: (Boolean) -> Unit,
+    onPrivacyOptions: () -> Unit,
+    onBuyPremium: (PremiumPlan) -> Unit,
+    onRestorePremium: () -> Unit,
+    onManageSubscription: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
     Column(
@@ -204,16 +228,30 @@ fun ProfileScreen(
             }
         }
 
-        SettingsCard(
-            remindersEnabled = state.remindersEnabled,
-            notificationsBlocked = notificationsBlocked,
-            exactAlarmBlocked = exactAlarmBlocked,
-            privacyOptionsRequired = privacyOptionsRequired,
-            onRemindersToggled = onRemindersToggled,
-            onOpenNotificationSettings = onOpenNotificationSettings,
-            onOpenExactAlarmSettings = onOpenExactAlarmSettings,
-            onPrivacyOptions = onPrivacyOptions
+        PremiumCard(
+            state = premiumState,
+            onBuy = onBuyPremium,
+            onRestore = onRestorePremium,
+            onManageSubscription = onManageSubscription
         )
+
+        SectionTitle(R.string.reminders_title) {
+            ReminderSettingsCard(
+                settings = state.reminders,
+                notificationsBlocked = notificationsBlocked,
+                exactAlarmBlocked = exactAlarmBlocked,
+                actions = reminderActions
+            )
+        }
+
+        SectionTitle(R.string.settings_title) {
+            SettingsCard(
+                analyticsEnabled = state.analyticsEnabled,
+                privacyOptionsRequired = privacyOptionsRequired,
+                onAnalyticsToggled = onAnalyticsToggled,
+                onPrivacyOptions = onPrivacyOptions
+            )
+        }
 
         Text(
             text = stringResource(R.string.profile_goal_hint),
@@ -313,93 +351,59 @@ private fun <T> ChoiceSection(
 }
 
 @Composable
-private fun SettingsCard(
-    remindersEnabled: Boolean,
-    notificationsBlocked: Boolean,
-    exactAlarmBlocked: Boolean,
-    privacyOptionsRequired: Boolean,
-    onRemindersToggled: (Boolean) -> Unit,
-    onOpenNotificationSettings: () -> Unit,
-    onOpenExactAlarmSettings: () -> Unit,
-    onPrivacyOptions: () -> Unit
-) {
+private fun SectionTitle(@StringRes title: Int, content: @Composable () -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(
-            text = stringResource(R.string.settings_title),
+            text = stringResource(title),
             style = MaterialTheme.typography.titleLarge
         )
-        Card(
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Row(
-                modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_notification),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
-                Spacer(Modifier.size(16.dp))
-                Column(Modifier.weight(1f)) {
-                    Text(stringResource(R.string.settings_reminders), style = MaterialTheme.typography.titleMedium)
-                    Text(
-                        text = stringResource(R.string.settings_reminders_desc),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                Switch(checked = remindersEnabled, onCheckedChange = onRemindersToggled)
-            }
-
-            when {
-                !remindersEnabled -> Unit
-                notificationsBlocked -> SettingsWarning(
-                    text = R.string.settings_notifications_blocked,
-                    isError = true,
-                    onAction = onOpenNotificationSettings
-                )
-                exactAlarmBlocked -> SettingsWarning(
-                    text = R.string.settings_exact_alarm,
-                    isError = false,
-                    onAction = onOpenExactAlarmSettings
-                )
-            }
-
-            if (privacyOptionsRequired) {
-                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-                TextButton(
-                    onClick = onPrivacyOptions,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 8.dp, vertical = 4.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.settings_privacy),
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-            }
-        }
+        content()
     }
 }
 
 @Composable
-private fun SettingsWarning(@StringRes text: Int, isError: Boolean, onAction: () -> Unit) {
-    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-    Row(
-        modifier = Modifier.padding(start = 20.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
+private fun SettingsCard(
+    analyticsEnabled: Boolean,
+    privacyOptionsRequired: Boolean,
+    onAnalyticsToggled: (Boolean) -> Unit,
+    onPrivacyOptions: () -> Unit
+) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
-            text = stringResource(text),
-            style = MaterialTheme.typography.bodyMedium,
-            color = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.weight(1f)
+        SwitchRow(
+            title = R.string.settings_analytics,
+            description = R.string.settings_analytics_desc,
+            checked = analyticsEnabled,
+            onCheckedChange = onAnalyticsToggled
         )
-        TextButton(onClick = onAction) {
-            Text(stringResource(R.string.settings_enable))
+        if (privacyOptionsRequired) {
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+            TextButton(
+                onClick = onPrivacyOptions,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.settings_privacy),
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+        val context = LocalContext.current
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+        TextButton(
+            onClick = { context.openPrivacyPolicy() },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 4.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.settings_privacy_policy),
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }
@@ -432,6 +436,28 @@ private fun Context.openNotificationSettings() {
         Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", packageName, null))
     }
     startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+}
+
+private fun Context.openReminderChannelSettings() {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+        openNotificationSettings()
+        return
+    }
+    val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+        .putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+        .putExtra(Settings.EXTRA_CHANNEL_ID, getString(R.string.reminder_channel_id))
+    startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+}
+
+private fun Context.openSubscriptionSettings() {
+    val uri = "https://play.google.com/store/account/subscriptions?sku=${PlayPremiumBilling.MONTHLY_PRODUCT_ID}&package=$packageName"
+        .toUri()
+    runCatching { startActivity(Intent(Intent.ACTION_VIEW, uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
+}
+
+private fun Context.openPrivacyPolicy() {
+    val uri = "https://oeaon.github.io/hydrodaily/privacy.html".toUri()
+    runCatching { startActivity(Intent(Intent.ACTION_VIEW, uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
 }
 
 private fun Context.canScheduleExactAlarms(): Boolean =
