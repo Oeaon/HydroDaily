@@ -41,6 +41,7 @@
     <string name="settings_notifications_blocked">Notifications are turned off for this app.</string>
     <string name="settings_enable">Turn on</string>
     <string name="settings_privacy">Privacy options</string>
+    <string name="settings_privacy_policy">Privacy policy</string>
 
     <string name="notification_title">Time to drink water! 💧</string>
     <string name="notification_body_progress">You\'ve had %1$s of %2$s. Drink a glass now and keep going.</string>

@@ -41,6 +41,7 @@
     <string name="settings_notifications_blocked">Las notificaciones están desactivadas para esta app.</string>
     <string name="settings_enable">Activar</string>
     <string name="settings_privacy">Opciones de privacidad</string>
+    <string name="settings_privacy_policy">Política de privacidad</string>
 
     <string name="notification_title">¡Hora de beber agua! 💧</string>
     <string name="notification_body_progress">Llevas %1$s de %2$s. Bebe un vaso ahora y sigue sumando.</string>

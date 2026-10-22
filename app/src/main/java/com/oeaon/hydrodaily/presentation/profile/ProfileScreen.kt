@@ -392,6 +392,19 @@ private fun SettingsCard(
                 )
             }
         }
+        val context = LocalContext.current
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+        TextButton(
+            onClick = { context.openPrivacyPolicy() },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 4.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.settings_privacy_policy),
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }
 
@@ -439,6 +452,11 @@ private fun Context.openReminderChannelSettings() {
 private fun Context.openSubscriptionSettings() {
     val uri = "https://play.google.com/store/account/subscriptions?sku=${PlayPremiumBilling.MONTHLY_PRODUCT_ID}&package=$packageName"
         .toUri()
+    runCatching { startActivity(Intent(Intent.ACTION_VIEW, uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
+}
+
+private fun Context.openPrivacyPolicy() {
+    val uri = "https://oeaon.github.io/hydrodaily/privacy.html".toUri()
     runCatching { startActivity(Intent(Intent.ACTION_VIEW, uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
 }
 

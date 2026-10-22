@@ -41,6 +41,7 @@
     <string name="settings_notifications_blocked">इस ऐप के लिए सूचनाएँ बंद हैं।</string>
     <string name="settings_enable">चालू करें</string>
     <string name="settings_privacy">गोपनीयता विकल्प</string>
+    <string name="settings_privacy_policy">गोपनीयता नीति</string>
 
     <string name="notification_title">पानी पीने का समय! 💧</string>
     <string name="notification_body_progress">आपने %2$s में से %1$s पानी पिया है। अभी एक गिलास पिएँ और जारी रखें।</string>

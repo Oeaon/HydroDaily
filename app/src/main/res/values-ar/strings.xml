@@ -41,6 +41,7 @@
     <string name="settings_notifications_blocked">الإشعارات متوقفة لهذا التطبيق.</string>
     <string name="settings_enable">تفعيل</string>
     <string name="settings_privacy">خيارات الخصوصية</string>
+    <string name="settings_privacy_policy">سياسة الخصوصية</string>
 
     <string name="notification_title">حان وقت شرب الماء! 💧</string>
     <string name="notification_body_progress">شربت %1$s من %2$s. اشرب كوبًا الآن واستمر.</string>

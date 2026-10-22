@@ -41,6 +41,7 @@
     <string name="settings_notifications_blocked">此应用的通知已关闭。</string>
     <string name="settings_enable">开启</string>
     <string name="settings_privacy">隐私选项</string>
+    <string name="settings_privacy_policy">隐私政策</string>
 
     <string name="notification_title">该喝水啦！💧</string>
     <string name="notification_body_progress">你已喝了 %1$s，目标 %2$s。现在喝一杯，继续加油。</string>

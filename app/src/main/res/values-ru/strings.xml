@@ -41,6 +41,7 @@
     <string name="settings_notifications_blocked">Уведомления для этого приложения отключены.</string>
     <string name="settings_enable">Включить</string>
     <string name="settings_privacy">Настройки конфиденциальности</string>
+    <string name="settings_privacy_policy">Политика конфиденциальности</string>
 
     <string name="notification_title">Пора выпить воды! 💧</string>
     <string name="notification_body_progress">Вы выпили %1$s из %2$s. Выпейте стакан сейчас и продолжайте.</string>
