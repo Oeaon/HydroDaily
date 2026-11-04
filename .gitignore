@@ -15,3 +15,5 @@ captures/
 app/release/
 app/debug/
 google-services.json
+# IDs reales de AdMob y dispositivos de prueba
+admob.properties

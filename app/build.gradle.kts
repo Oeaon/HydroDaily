@@ -1,3 +1,4 @@
+import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -16,7 +17,19 @@ object TestAdUnits {
     const val APP_OPEN = "ca-app-pub-3940256099942544/9257395921"
 }
 
-fun adProperty(name: String): String = (findProperty(name) as String?).orEmpty().trim()
+// IDs reales de AdMob en admob.properties (no se sube a git; ver admob.properties.example).
+// Si falta un ID se usa el de prueba de Google, así nunca se publica un ID vacío.
+val admob = Properties().apply {
+    val file = rootProject.file("admob.properties")
+    if (file.exists()) file.inputStream().use { load(it) }
+}
+
+fun adProperty(name: String, fallback: String = ""): String =
+    (admob.getProperty(name) ?: findProperty(name) as String?)?.trim()?.takeIf { it.isNotEmpty() } ?: fallback
+
+// Hashes de tus móviles y los de los testers, separados por comas: reciben anuncios de prueba
+// aunque instalen la versión de Play.
+val testDeviceIds: String = adProperty("admob.testDeviceIds")
 
 android {
     namespace = "com.oeaon.hydrodaily"
@@ -28,6 +41,7 @@ android {
         targetSdk = 36
         versionCode = 11
         versionName = "2.1"
+        buildConfigField("String", "TEST_DEVICE_IDS", "\"$testDeviceIds\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,10 +60,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            manifestPlaceholders["admobAppId"] = adProperty("admob.appId")
-            buildConfigField("String", "AD_BANNER_ID", "\"${adProperty("admob.bannerId")}\"")
-            buildConfigField("String", "AD_INTERSTITIAL_ID", "\"${adProperty("admob.interstitialId")}\"")
-            buildConfigField("String", "AD_APP_OPEN_ID", "\"${adProperty("admob.appOpenId")}\"")
+            manifestPlaceholders["admobAppId"] = adProperty("admob.appId", TestAdUnits.APP_ID)
+            buildConfigField("String", "AD_BANNER_ID", "\"${adProperty("admob.bannerId", TestAdUnits.BANNER)}\"")
+            buildConfigField("String", "AD_INTERSTITIAL_ID", "\"${adProperty("admob.interstitialId", TestAdUnits.INTERSTITIAL)}\"")
+            buildConfigField("String", "AD_APP_OPEN_ID", "\"${adProperty("admob.appOpenId", TestAdUnits.APP_OPEN)}\"")
         }
     }
 

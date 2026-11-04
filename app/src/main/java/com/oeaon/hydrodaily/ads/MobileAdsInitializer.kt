@@ -2,6 +2,8 @@ package com.oeaon.hydrodaily.ads
 
 import android.content.Context
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
+import com.oeaon.hydrodaily.BuildConfig
 import com.oeaon.hydrodaily.di.ApplicationScope
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
@@ -29,6 +31,9 @@ class MobileAdsInitializer @Inject constructor(
             if (_isReady.value) onReady()
             return
         }
+        // Los dispositivos de prueba (admob.testDeviceIds en admob.properties) nunca reciben anuncios reales.
+        val testDevices = BuildConfig.TEST_DEVICE_IDS.split(",").map { it.trim() }.filter { it.isNotEmpty() }
+        MobileAds.setRequestConfiguration(RequestConfiguration.Builder().setTestDeviceIds(testDevices).build())
         scope.launch(Dispatchers.IO) {
             MobileAds.initialize(context) {
                 scope.launch(Dispatchers.Main) {
