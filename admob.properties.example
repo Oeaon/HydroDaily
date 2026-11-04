@@ -1,0 +1,9 @@
+# Copia este archivo como admob.properties (no se sube a git) y pon los IDs de AdMob de HydroDaily.
+admob.appId=ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX
+admob.bannerId=ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX
+admob.interstitialId=ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX
+admob.appOpenId=ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX
+
+# Hashes de tus dispositivos y los de los testers, separados por comas. Reciben anuncios de prueba.
+# Salen en Logcat al pedir un anuncio: "Use RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("HASH"))".
+admob.testDeviceIds=
